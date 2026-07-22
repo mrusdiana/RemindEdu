@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masuk — Lumina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/login.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+  <!-- ===== LEFT PANEL — BRAND / ART ===== -->
+  <aside class="auth-side" aria-hidden="true">
+    <a href="index.html" class="logo">Lumina<span>.</span></a>
+
+    <div class="side-art">
+      <svg viewBox="0 0 320 380" class="art-svg">
+        <rect x="0" y="0" width="320" height="380" rx="28" fill="var(--navy-2)"/>
+        <circle cx="230" cy="90" r="70" fill="var(--orange)" opacity="0.9"/>
+        <path d="M60 260 Q160 200 260 260 L260 340 Q160 300 60 340 Z" fill="var(--cream)"/>
+        <rect x="95" y="150" width="130" height="90" rx="10" fill="var(--purple)"/>
+        <rect x="110" y="165" width="100" height="8" rx="4" fill="var(--navy-1)" opacity="0.5"/>
+        <rect x="110" y="182" width="70" height="8" rx="4" fill="var(--navy-1)" opacity="0.5"/>
+      </svg>
+      <div class="floating-chip chip-a">🎓 25K+ murid aktif</div>
+      <div class="floating-chip chip-b">📘 130+ modul kelas</div>
+    </div>
+
+    <blockquote class="side-quote">
+      “Belajar jadi terasa dekat — seperti punya mentor pribadi
+      yang selalu siap membantu.”
+      <span>— Murid Lumina</span>
+    </blockquote>
+  </aside>
+
+  <!-- ===== RIGHT PANEL — LOGIN FORM ===== -->
+  <main class="auth-main">
+    <div class="auth-card">
+      <p class="eyebrow">Selamat Datang Kembali</p>
+      <h1>Masuk ke akunmu</h1>
+      <p class="auth-sub">Lanjutkan proses belajarmu tepat di titik terakhir kamu berhenti.</p>
+
+      <div class="social-row">
+        <button type="button" class="btn-social">
+          <span class="ic">G</span> Google
+        </button>
+        <button type="button" class="btn-social">
+          <span class="ic">f</span> Facebook
+        </button>
+      </div>
+
+      <div class="divider"><span>atau masuk dengan email</span></div>
+
+      <form class="auth-form" novalidate>
+        <label class="field">
+          <span class="field-label">Alamat email</span>
+          <input type="email" name="email" placeholder="nama@email.com" autocomplete="email" required>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Kata sandi</span>
+          <div class="password-wrap">
+            <input type="password" name="password" id="password" placeholder="Masukkan kata sandi" autocomplete="current-password" required>
+            <button type="button" class="toggle-pass" id="togglePass" aria-label="Tampilkan kata sandi">👁</button>
+          </div>
+        </label>
+
+        <div class="field-row">
+          <label class="checkbox">
+            <input type="checkbox" name="remember">
+            <span>Ingat saya</span>
+          </label>
+          <a href="#" class="link-arrow small">Lupa kata sandi?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+      </form>
+
+      <p class="auth-footer">
+        Belum punya akun? <a href="#" class="link-arrow small">Daftar sekarang</a>
+      </p>
+    </div>
+  </main>
+
+</div>
+
+<script>
+  const toggleBtn = document.getElementById('togglePass');
+  const passInput = document.getElementById('password');
+  toggleBtn.addEventListener('click', () => {
+    const isPassword = passInput.type === 'password';
+    passInput.type = isPassword ? 'text' : 'password';
+    toggleBtn.textContent = isPassword ? '🙈' : '👁';
+  });
+</script>
+
+</body>
+</html>
