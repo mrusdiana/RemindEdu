@@ -1,0 +1,285 @@
+/* Styling Kapsul Melayang di Tengah */
+.nav-pill-container {
+    background-color: #f1f3f5;
+    border-radius: 50rem;
+    gap: 4px;
+}
+
+.nav-pill-item {
+    color: #495057;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 50rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-pill-item:hover {
+    color: #2563eb;
+}
+
+.nav-pill-item.active {
+    background-color: #ffffff !important;
+    color: #2563eb !important;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.custom-blur-nav {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.hero-section {
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+}
+
+.section-features {
+    margin-top: 65px !important;
+}
+
+
+.trusted-capsule {
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+
+.hero-image-container {
+    padding: 10px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 1.5rem;
+}
+
+
+.btn-light {
+    background-color: #ffffff;
+    border-color: #e2e8f0;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-light:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.feature-card {
+
+    background: #fff;
+
+    border: 1px solid #ececec;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    transition: all .3s ease;
+
+    height: 100%;
+
+}
+
+.feature-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+    font-size: 20px;
+
+}
+
+.feature-card h5 {
+
+    font-size: 1.15rem;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+
+    color: #1f2937;
+
+}
+
+.feature-card p {
+
+    color: #6b7280;
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ===========================
+    TESTIMONIAL
+=========================== */
+
+.testimonial-section{
+    background:#fff;
+}
+
+.section-label{
+    color:#3b82f6;
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.section-title{
+    font-weight:700;
+    font-size:2.3rem;
+    color:#1f2937;
+}
+
+.testimonial-card{
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:24px;
+    background:#fff;
+    transition:.3s;
+}
+
+.testimonial-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+}
+
+.stars{
+    color:#fbbf24;
+    font-size:18px;
+}
+
+.review{
+    color:#4b5563;
+    line-height:1.7;
+    font-size:.95rem;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:.8rem;
+    font-weight:700;
+}
+
+.testimonial-card h6{
+    font-weight:700;
+    margin:0;
+}
+
+.testimonial-card small{
+    color:#6b7280;
+}
+
+/* ===========================
+    CTA
+=========================== */
+
+.cta-section{
+    background:#2f61ea;
+    color:white;
+    padding:90px 0;
+}
+
+.cta-section h2{
+    font-size:3rem;
+    font-weight:700;
+    max-width:700px;
+    margin:auto;
+}
+
+.cta-section p{
+    margin:25px auto;
+    max-width:700px;
+    opacity:.9;
+}
+
+.cta-section .btn{
+    border-radius:12px;
+    padding:14px 28px;
+    font-weight:600;
+}
+
+.cta-section .btn-outline-light:hover{
+    background:white;
+    color:#2f61ea;
+}
+
+/* ===========================
+    FOOTER
+=========================== */
+
+.footer{
+    background:#fff;
+    border-top:1px solid #eee;
+}
+
+.logo{
+    color:#2f61ea;
+    font-weight:700;
+}
+
+.footer small{
+    color:#6b7280;
+}
+
+.footer a{
+    color:#6b7280;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.footer a:hover{
+    color:#2f61ea;
+}

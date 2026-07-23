@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "postId": 1,
+      "hashtagId": 1,
+      "createdAt": "2026-07-15T09:00:00.000Z",
+      "updatedAt": "2026-07-15T09:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "hashtagId": 2,
+      "createdAt": "2026-07-15T09:00:00.000Z",
+      "updatedAt": "2026-07-15T09:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "postId": 2,
+      "hashtagId": 3,
+      "createdAt": "2026-07-01T18:30:00.000Z",
+      "updatedAt": "2026-07-01T18:30:00.000Z"
+    },
+    {
+      "id": 4,
+      "postId": 2,
+      "hashtagId": 4,
+      "createdAt": "2026-07-01T18:30:00.000Z",
+      "updatedAt": "2026-07-01T18:30:00.000Z"
+    },
+    {
+      "id": 5,
+      "postId": 3,
+      "hashtagId": 5,
+      "createdAt": "2026-07-20T20:10:00.000Z",
+      "updatedAt": "2026-07-20T20:10:00.000Z"
+    },
+    {
+      "id": 6,
+      "postId": 3,
+      "hashtagId": 6,
+      "createdAt": "2026-07-20T20:10:00.000Z",
+      "updatedAt": "2026-07-20T20:10:00.000Z"
+    },
+    {
+      "id": 7,
+      "postId": 4,
+      "hashtagId": 7,
+      "createdAt": "2026-07-19T15:45:00.000Z",
+      "updatedAt": "2026-07-19T15:45:00.000Z"
+    },
+    {
+      "id": 8,
+      "postId": 6,
+      "hashtagId": 8,
+      "createdAt": "2026-07-18T07:20:00.000Z",
+      "updatedAt": "2026-07-18T07:20:00.000Z"
+    }
+  ]

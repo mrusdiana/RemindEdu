@@ -1,0 +1,66 @@
+[
+    {
+      "id": 1,
+      "userId": 1,
+      "bio": "Mahasiswa Teknik Informatika, suka ngoding dan ngopi.",
+      "avatar": "https://i.pravatar.cc/150?img=1",
+      "createdAt": "2026-01-05T08:05:00.000Z",
+      "updatedAt": "2026-01-05T08:05:00.000Z"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "bio": "Full-time procrastinator, part-time achiever.",
+      "avatar": "https://i.pravatar.cc/150?img=2",
+      "createdAt": "2026-01-06T09:20:00.000Z",
+      "updatedAt": "2026-01-06T09:20:00.000Z"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "bio": "Belajar desain UI/UX setiap hari.",
+      "avatar": "https://i.pravatar.cc/150?img=3",
+      "createdAt": "2026-01-08T10:25:00.000Z",
+      "updatedAt": "2026-01-08T10:25:00.000Z"
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "bio": null,
+      "avatar": "https://i.pravatar.cc/150?img=4",
+      "createdAt": "2026-01-10T07:50:00.000Z",
+      "updatedAt": "2026-01-10T07:50:00.000Z"
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "bio": "Content creator & mahasiswa semester akhir.",
+      "avatar": "https://i.pravatar.cc/150?img=5",
+      "createdAt": "2026-01-12T11:35:00.000Z",
+      "updatedAt": "2026-01-12T11:35:00.000Z"
+    },
+    {
+      "id": 6,
+      "userId": 6,
+      "bio": "Suka baca buku dan nonton anime.",
+      "avatar": "https://i.pravatar.cc/150?img=6",
+      "createdAt": "2026-01-14T13:05:00.000Z",
+      "updatedAt": "2026-01-14T13:05:00.000Z"
+    },
+    {
+      "id": 7,
+      "userId": 7,
+      "bio": null,
+      "avatar": "https://i.pravatar.cc/150?img=7",
+      "createdAt": "2026-01-16T08:55:00.000Z",
+      "updatedAt": "2026-01-16T08:55:00.000Z"
+    },
+    {
+      "id": 8,
+      "userId": 8,
+      "bio": "Freelancer dan pejuang skripsi.",
+      "avatar": "https://i.pravatar.cc/150?img=8",
+      "createdAt": "2026-01-18T14:45:00.000Z",
+      "updatedAt": "2026-01-18T14:45:00.000Z"
+    }
+  ]
