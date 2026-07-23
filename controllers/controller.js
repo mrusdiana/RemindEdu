@@ -1,5 +1,6 @@
 const { timeRemaining, checkUrgency, countUrgentTasks } = require('../helpers/helper');
 const { User, Task, Post, Profile } = require('../models/index')
+const transporter = require('../config/mailer');
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 

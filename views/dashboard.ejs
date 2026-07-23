@@ -15,7 +15,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-expand bg-white border-bottom px-3 px-md-4 py-2">
+  <nav class="navbar navbar-expand bg-white border-bottom px-3 px-md-4 py-2 fixed-top">
     <div class="container-fluid p-0">
       <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="/">
         <span class="brand-icon"><i class="bi bi-mortarboard-fill"></i></span>
@@ -39,18 +39,18 @@
           <i class="bi bi-bell"></i>
           <span class="notif-badge"><%= taskUnfinish.length %></span>
         </button>
-        <span class="avatar-circle">JP</span>
+        <span class="avatar-circle"><%= user.name.slice(0,2).toUpperCase() %></span>
       </div>
 
     </div>
   </nav>
 
   <!-- Page content -->
-  <main class="container dashboard-container py-4 py-md-5">
+  <main class="container dashboard-container py-4 py-md-5 mt-5">
 
     <!-- Greeting -->
     <div class="mb-4">
-      <h2 class="fw-bold mb-1">Good afternoon,  <%= user.name %> 👋</h2>
+      <h2 class="fw-bold mb-1">Good afternoon,  <%= user.name %> !</h2>
       <p class="text-muted mb-0"><%= new Date().toLocaleDateString('id-ID') %> &middot; <%= taskUnfinish.length %> pending tasks</p>
     </div>
 
