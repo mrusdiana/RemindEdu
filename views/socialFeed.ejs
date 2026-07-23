@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/styles/social-feed.css">
+    <link rel="stylesheet" href="public/styles/social-feed.css">
 </head>
 
 <body>
@@ -31,13 +31,13 @@
 
             <!-- Center nav pills -->
             <div class="nav-pill-group d-none d-md-flex mx-auto">
-                <a href="dashboard.html" class="nav-pill-item">
+                <a href="/student/dashboard" class="nav-pill-item">
                     <i class="bi bi-bar-chart"></i> Dashboard
                 </a>
-                <a href="social-feed.html" class="nav-pill-item active">
+                <a href="/student/socialFeed" class="nav-pill-item active">
                     <i class="bi bi-layers"></i> Social Feed
                 </a>
-                <a href="profile.html" class="nav-pill-item">
+                <a href="/student/profile" class="nav-pill-item">
                     <i class="bi bi-journal-bookmark"></i> Profile
                 </a>
             </div>
@@ -94,68 +94,40 @@
                     <a href="#" class="trending-tag">#CS301</a>
                 </div>
 
-                <!-- Posts -->
-                <div class="d-flex flex-column gap-3">
-
-                    <article class="card post-card border-0 shadow-sm">
-                        <div class="card-body p-3 p-md-4">
-                            <div class="d-flex align-items-start gap-3 mb-2">
-                                <span class="avatar-circle avatar-circle--purple flex-shrink-0">AC</span>
-                                <div class="flex-grow-1">
-                                    <div class="post-author">Aria Chen</div>
-                                    <div class="post-submeta">Engineering &middot; Year 3 &middot; 2 hours ago</div>
+                 <% posts.forEach(element => { %>
+                  
+                    <div class="d-flex flex-column gap-3">
+    
+                        <article class="card post-card border-0 shadow-sm">
+                            <div class="card-body p-3 p-md-4">
+                                <div class="d-flex align-items-start gap-3 mb-2">
+                                    <span class="avatar-circle avatar-circle--purple flex-shrink-0">AC</span>
+                                    <div class="flex-grow-1">
+                                        <div class="post-author">Aria Chen</div>
+                                        <div class="post-submeta">Engineering &middot; Year 3 &middot; 2 hours ago</div>
+                                    </div>
+                                    <button class="icon-btn" aria-label="Save post"><i class="bi bi-bookmark"></i></button>
                                 </div>
-                                <button class="icon-btn" aria-label="Save post"><i class="bi bi-bookmark"></i></button>
-                            </div>
-                            <p class="post-body mb-2">
-                                Anyone have good resources for integrating real-world applications with derivative
-                                problems?
-                                Working on my midterm project and the textbook examples feel too abstract.
-                                Would love some YouTube channels or practice sites! 🙌
-                            </p>
-                            <div class="post-tags mb-3">
-                                <span class="post-tag">#Calculus</span>
-                                <span class="post-tag">#UAS</span>
-                                <span class="post-tag">#MidtermPrep</span>
-                            </div>
-                            <div class="post-footer d-flex gap-4">
-                                <button class="post-action"><i class="bi bi-heart-fill text-danger"></i> 15
-                                    likes</button>
-                                <button class="post-action"><i class="bi bi-chat"></i> 6 replies</button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="card post-card border-0 shadow-sm">
-                        <div class="card-body p-3 p-md-4">
-                            <div class="d-flex align-items-start gap-3 mb-2">
-                                <span class="avatar-circle avatar-circle--green flex-shrink-0">MR</span>
-                                <div class="flex-grow-1">
-                                    <div class="post-author">Marcus Rivera</div>
-                                    <div class="post-submeta">Statistics &middot; Year 2 &middot; 5 hours ago</div>
+                                <p class="post-body mb-2">
+                                    Anyone have good resources for integrating real-world applications with derivative
+                                    problems?
+                                    Working on my midterm project and the textbook examples feel too abstract.
+                                    Would love some YouTube channels or practice sites! 🙌
+                                </p>
+                                <div class="post-tags mb-3">
+                                    <span class="post-tag">#Calculus</span>
+                                    <span class="post-tag">#UAS</span>
+                                    <span class="post-tag">#MidtermPrep</span>
                                 </div>
-                                <button class="icon-btn" aria-label="Save post"><i class="bi bi-bookmark"></i></button>
+                                <div class="post-footer d-flex gap-4">
+                                    <button class="post-action"><i class="bi bi-heart-fill text-danger"></i> 15
+                                        likes</button>
+                                    <button class="post-action"><i class="bi bi-chat"></i> 6 replies</button>
+                                </div>
                             </div>
-                            <p class="post-body mb-2">
-                                Just finished my stats assignment early for once 🎉 Pro tip: always visualize your data
-                                distribution BEFORE choosing a statistical test. Saved me from using a t-test on skewed
-                                data.
-                                Hope this helps someone!
-                            </p>
-                            <div class="post-tags mb-3">
-                                <span class="post-tag">#Statistics</span>
-                                <span class="post-tag">#StudyTips</span>
-                                <span class="post-tag">#DataScience</span>
-                            </div>
-                            <div class="post-footer d-flex gap-4">
-                                <button class="post-action"><i class="bi bi-heart-fill text-danger"></i> 31
-                                    likes</button>
-                                <button class="post-action"><i class="bi bi-chat"></i> 12 replies</button>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
+                        </article>
+                    </div>
+                 <% }) %>
 
             </div>
         </div>
@@ -163,4 +135,4 @@
 
 </body>
 
-</html>
+</html> 
