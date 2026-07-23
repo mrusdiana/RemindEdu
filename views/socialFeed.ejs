@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="public/styles/social-feed.css">
+    <a href="/student/socialFeed" class="nav-pill-item active">
 </head>
 
 <body>
@@ -34,13 +34,16 @@
                 <a href="/student/dashboard" class="nav-pill-item">
                     <i class="bi bi-bar-chart"></i> Dashboard
                 </a>
-                <a href="/student/socialFeed" class="nav-pill-item active">
+                <!-- Ubah href ke /socialFeed -->
+                <a href="/socialFeed" class="nav-pill-item active">
                     <i class="bi bi-layers"></i> Social Feed
                 </a>
-                <a href="/student/profile" class="nav-pill-item">
+                <!-- Ubah href ke /profile -->
+                <a href="/profile" class="nav-pill-item">
                     <i class="bi bi-journal-bookmark"></i> Profile
                 </a>
             </div>
+
 
             <!-- Right actions -->
             <div class="d-flex align-items-center gap-3 ms-auto ms-md-0">
@@ -94,41 +97,63 @@
                     <a href="#" class="trending-tag">#CS301</a>
                 </div>
 
-                <% posts.forEach(element=> { %>
-
-                    <div class="d-flex flex-column gap-3">
-
+                <div class="d-flex flex-column gap-3">
+                    <% post.forEach(element=> { %>
                         <article class="card post-card border-0 shadow-sm">
                             <div class="card-body p-3 p-md-4">
+
+                                <!-- Header Post: Author & Meta -->
                                 <div class="d-flex align-items-start gap-3 mb-2">
-                                    <span class="avatar-circle avatar-circle--purple flex-shrink-0">AC</span>
+
+                                    <!-- Avatar Inisial Sederhana (Bebas Error) -->
+                                    <span class="avatar-circle avatar-circle--purple flex-shrink-0">
+                                        <% if (element.User && element.User.name) { %>
+                                            <%= element.User.name.substring(0, 2).toUpperCase() %>
+                                                <% } else { %>
+                                                    U<%= element.userId %>
+                                                        <% } %>
+                                    </span>
+
                                     <div class="flex-grow-1">
-                                        <div class="post-author">Aria Chen</div>
-                                        <div class="post-submeta">Engineering &middot; Year 3 &middot; 2 hours ago</div>
+                                        <!-- Menampilkan nama User -->
+                                        <div class="post-author">
+                                            <%= element.User ? element.User.name : 'User ' + element.userId %>
+                                        </div>
+
+                                        <!-- Format Tanggal Langsung Menggunakan .toDateString() -->
+                                        <div class="post-submeta">
+                                            <%= element.User ? element.User.role : 'Student' %> -
+                                                <%= element.createdAt ? new Date(element.createdAt).toDateString() : ''
+                                                    %>
+                                        </div>
                                     </div>
                                     <button class="icon-btn" aria-label="Save post"><i
                                             class="bi bi-bookmark"></i></button>
                                 </div>
+
+                                <!-- Isi Konten Post -->
                                 <p class="post-body mb-2">
-                                    Anyone have good resources for integrating real-world applications with derivative
-                                    problems?
-                                    Working on my midterm project and the textbook examples feel too abstract.
-                                    Would love some YouTube channels or practice sites! 🙌
+                                    <%= element.content %>
                                 </p>
+
+                                <!-- Bagian Tag -->
                                 <div class="post-tags mb-3">
-                                    <span class="post-tag">#Calculus</span>
-                                    <span class="post-tag">#UAS</span>
-                                    <span class="post-tag">#MidtermPrep</span>
+                                    <span class="post-tag">#RemindEdu</span>
+                                    <span class="post-tag">#SharingIsCaring</span>
                                 </div>
+
+                                <!-- Footer Post -->
                                 <div class="post-footer d-flex gap-4">
-                                    <button class="post-action"><i class="bi bi-heart-fill text-danger"></i> 15
-                                        likes</button>
-                                    <button class="post-action"><i class="bi bi-chat"></i> 6 replies</button>
+                                    <button class="post-action"><i class="bi bi-heart"></i> 0 likes</button>
+                                    <button class="post-action"><i class="bi bi-chat"></i> 0 replies</button>
                                 </div>
+
                             </div>
                         </article>
-                    </div>
-                    <% }) %>
+                        <% }) %>
+                </div>
+
+
 
             </div>
         </div>

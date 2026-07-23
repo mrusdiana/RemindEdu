@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .login-page {
     display: flex;
     height: 100vh;
@@ -14,8 +13,6 @@
 
 .brand__name {
   font-size: 1rem;
-=======
-* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -48,48 +45,32 @@ body, html {
 
 .brand__name {
   font-size: 0.95rem;
->>>>>>> Rusdi
   font-weight: 500;
   color: #ffffff;
   letter-spacing: -0.5px;
 }
 
 .hero {
-<<<<<<< HEAD
     margin: 10px 0;
-=======
   margin: 5px 0;
->>>>>>> Rusdi
 }
 
 .login-hero__title {
   font-size: 2rem;
   font-weight: 800;
   color: #ffffff;
-<<<<<<< HEAD
-  margin-bottom: 10px;
-  /* padding: 30px; */
-=======
   margin-bottom: 8px;
->>>>>>> Rusdi
 }
 
 .login-hero__subtitle {
   color: rgba(255, 255, 255, 0.75);
-<<<<<<< HEAD
   margin: 0px 0;
-=======
   font-size: 0.9rem;
   margin-bottom: 15px;
->>>>>>> Rusdi
 }
 
 .login-hero__features {
   list-style: none;
-<<<<<<< HEAD
-  /* margin: 10px; */
-=======
->>>>>>> Rusdi
 }
 
 .check {
@@ -101,10 +82,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD
   /* font-size: 0.85rem; */
-=======
->>>>>>> Rusdi
   font-weight: bold;
 }
 
@@ -112,63 +90,50 @@ body, html {
   display: flex;
   align-items: center;
   gap: 12px;
-<<<<<<< HEAD
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 16px;
-=======
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 12px;
->>>>>>> Rusdi
 }
 
 .testimonial {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-<<<<<<< HEAD
   backdrop-filter: blur(10px); /* Efek kaca frosted glass */
   padding: 15px;
   border-radius: 16px;
-=======
   backdrop-filter: blur(10px);
   padding: 14px;
   border-radius: 14px;
->>>>>>> Rusdi
   width: 100%;
 }
 
 .testimonial__stars {
-<<<<<<< HEAD
   color: #ffc107; /* Warna emas/kuning bintang */
   font-size: 0.9rem;
   margin-bottom: 12px;
-=======
   color: #ffc107;
   font-size: 0.85rem;
   margin-bottom: 6px;
->>>>>>> Rusdi
   letter-spacing: 2px;
 }
 
 .testimonial__quote {
-<<<<<<< HEAD
   font-size: 0.8rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 20px;
-=======
   font-size: 0.78rem;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 12px;
->>>>>>> Rusdi
 }
 
 .testimonial__author {
   display: flex;
   align-items: center;
-<<<<<<< HEAD
   gap: 12px;
 }
 
@@ -178,7 +143,6 @@ body, html {
   color: #ffffff;
   width: 30px;
   height: 30px;
-=======
   gap: 10px;
 }
 
@@ -187,40 +151,32 @@ body, html {
   color: #ffffff;
   width: 28px;
   height: 28px;
->>>>>>> Rusdi
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-<<<<<<< HEAD
   font-size: 0.95rem;
-=======
   font-size: 0.85rem;
->>>>>>> Rusdi
 }
 
 .testimonial__name {
   font-weight: 600;
   color: #ffffff;
-<<<<<<< HEAD
   font-size: 0.7rem;
 }
 
 .testimonial__role {
   font-size: 0.7rem;
-=======
   font-size: 0.75rem;
 }
 
 .testimonial__role {
   font-size: 0.65rem;
->>>>>>> Rusdi
   color: rgba(255, 255, 255, 0.6);
 }
 
 
-<<<<<<< HEAD
 /* ini bagian kanan */
 
 .login-form-panel {
@@ -265,7 +221,7 @@ body, html {
 
 .field {
     margin-bottom: 20px;
-=======
+}
 /* Bagian Kanan (Form Panel) - Center Full */
 .login-form-panel {
   flex: 1; /* Mengambil separuh layar bagian kanan */
@@ -300,26 +256,21 @@ body, html {
 
 .field {
   margin-bottom: 16px;
->>>>>>> Rusdi
 }
 
 .field label,
 .field__label-row label {
-<<<<<<< HEAD
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-=======
   display: block;
   margin-bottom: 6px;
   font-weight: 500;
   font-size: 0.85rem;
->>>>>>> Rusdi
 }
 
 .field input[type="email"],
 .password-input input[type="password"] {
-<<<<<<< HEAD
     width: 100%;
     padding: 10px 14px;
     border: 1px solid #ced4da;
@@ -402,7 +353,6 @@ body {
     padding: 0;
     width: 100%;
     min-height: 100vh;
-=======
   width: 100%;
   padding: 10px 14px;
   border: 1px solid #ced4da;
@@ -473,5 +423,4 @@ body {
 
 .link-inline:hover {
   text-decoration: underline;
->>>>>>> Rusdi
 }

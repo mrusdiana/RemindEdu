@@ -4,7 +4,7 @@ const post = require('../models/post');
 
 class Controller {
 
-    static async homePage(req, res){
+    static async homePage(req, res) {
         try {
             res.render('homePage')
         } catch (error) {
@@ -23,17 +23,17 @@ class Controller {
     static async studentDashboard(req, res) {
         try {
             const tasks = await Task.findAll({ where: { userId: req.session.userId } });
-            let user = await User.findByPk(req.session.userId )
+            let user = await User.findByPk(req.session.userId)
 
             console.log(user);
 
             console.log(tasks);
-            res.render('dashboard', { tasks, role: 'student' , user});
+            res.render('dashboard', { tasks, role: 'student', user });
         } catch (error) {
             res.send(error);
         }
     }
-    
+
     static async adminDashboard(req, res) {
         try {
             res.send('Admin')
@@ -43,7 +43,7 @@ class Controller {
             res.send(error);
         }
     }
-    
+
     static async manageUsers(req, res) {
         try {
             const users = await User.findAll();
@@ -52,12 +52,12 @@ class Controller {
             res.send(error);
         }
     }
-    
+
     static async postRegister(req, res) {
         try {
             const { name, email, password, role } = req.body;
 
-            await User.create({ name, email, password, role});
+            await User.create({ name, email, password, role });
 
             res.redirect('/login');
         } catch (error) {
@@ -67,15 +67,23 @@ class Controller {
             res.send(error);
         }
     }
-    
-    static async login(req, res) {
+
+    static async signUp(req, res) {
         try {
-            res.render('login', { error: req.query.error || null }); 
+            res.render('signUp');
         } catch (error) {
             res.send(error);
         }
     }
-    
+
+    static async login(req, res) {
+        try {
+            res.render('login', { error: req.query.error || null });
+        } catch (error) {
+            res.send(error);
+        }
+    }
+
     static async postLogin(req, res) {
         try {
             const { email, password } = req.body;
@@ -84,25 +92,25 @@ class Controller {
 
             // console.log(user, "<<<");
             // console.log(users);
-    
+
             if (!user || !(await user.comparePassword(password))) {
                 return res.redirect('/login?error=Email atau password salah'); // Pakai return
             }
-    
+
             req.session.userId = user.id;
             req.session.role = user.role;
-    
+
             if (user.role === 'admin') {
                 return res.redirect('/admin'); // Pakai return
             }
-            
+
             return res.redirect('/student'); // Pakai return
         } catch (err) {
             console.log(err);
             res.send(err);
         }
     }
-    
+
     static async logout(req, res) {
         try {
             req.session.destroy();
@@ -112,116 +120,120 @@ class Controller {
         }
     }
 
-    static async dashboard(req, res){
+    static async dashboard(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async socialFeed(req, res){
+    static async socialFeed(req, res) {
         try {
-            const post = await Post.findAll({ where: { userId: req.session.userId } });
-            let user = await User.findByPk(req.session.userId )
-            res.render('socialFeed')
+            const post = await Post.findAll({
+                include: 'User',
+                order: [['createdAt', 'DESC']]
+            });
+
+            res.render('socialFeed', { post });
         } catch (error) {
             console.log(error);
-            res.send(error)
+            res.send(error);
         }
     }
 
-    static async getAddTask(req, res){
+
+    static async getAddTask(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async postAddTask(req, res){
+    static async postAddTask(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async getEditTask(req, res){
+    static async getEditTask(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async postEditTask(req, res){
+    static async postEditTask(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async getAddFeed(req, res){
+    static async getAddFeed(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async postAddFeed(req, res){
+    static async postAddFeed(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async getEditFeed(req, res){
+    static async getEditFeed(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async postEditFeed(req, res){
+    static async postEditFeed(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async taskCompleted(req, res){
+    static async taskCompleted(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async deleteFeed(req, res){
+    static async deleteFeed(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async deleteTask(req, res){
+    static async deleteTask(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
     }
 
-    static async profile(req, res){
+    static async profile(req, res) {
         try {
-            
+
         } catch (error) {
             res.send(error)
         }
