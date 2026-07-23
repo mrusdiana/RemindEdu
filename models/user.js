@@ -1,5 +1,5 @@
 'use strict';
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
 
 const {
   Model
@@ -12,29 +12,73 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId'
       }),
 
-      User.hasMany(models.Post, {
-        foreignKey: 'userId'
-      }),
-      
-      User.hasMany(models.Task, {
-        foreignKey: 'userId'
-      })
+        User.hasMany(models.Post, {
+          foreignKey: 'userId'
+        }),
+
+        User.hasMany(models.Task, {
+          foreignKey: 'userId'
+        })
     }
 
-    
   }
   User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING
+    name:
+    {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Name is Required!"
+        },
+        notNull: {
+          msg: "Name is Required!"
+        }
+      }
+    },
+    email:  {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Email is Required!"
+        },
+        notNull: {
+          msg: "Email is Required!"
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Password is Required!"
+        },
+        notNull: {
+          msg: "Password is Required!"
+        }
+      }
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Role is Required!"
+        },
+        notNull: {
+          msg: "Role is Required!"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'User',
   });
 
   User.prototype.comparePassword = async function (candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
+    return await bcrypt.compare(candidatePassword, this.password);
   };
 
   User.beforeCreate(async (user) => {

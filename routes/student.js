@@ -3,8 +3,8 @@ const router = require('express').Router();
 
 // dashboard: cuma nampilin task MILIK SENDIRI
 router.get('/', Controller.studentDashboard);
-router.get('/tasks/add', Controller.getAddTask);
-router.post('/tasks/add', Controller.postAddTask);
+router.get('/tasks/:id/add', Controller.getAddTask);
+router.post('/tasks/:id/add', Controller.postAddTask);
 router.get('/tasks/:id', Controller.taskCompleted);
 router.get('/tasks/:id/edit', Controller.getEditTask);
 router.post('/tasks/:id/edit', Controller.postEditTask);
