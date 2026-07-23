@@ -454,3 +454,16 @@
     .task-row { flex-wrap: wrap; }
   }
   
+  /* tombol submit yang memakai gaya link (complete & delete task via form POST) */
+  button.task-check {
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  button.icon-action {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }

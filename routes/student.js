@@ -5,7 +5,7 @@ const router = require('express').Router();
 router.get('/', Controller.studentDashboard);
 router.get('/tasks/:id/add', Controller.getAddTask);
 router.post('/tasks/:id/add', Controller.postAddTask);
-router.get('/tasks/:id', Controller.taskCompleted);
+router.post('/tasks/:id', Controller.taskCompleted);
 router.get('/tasks/:id/edit', Controller.getEditTask);
 router.post('/tasks/:id/edit', Controller.postEditTask);
 router.get('/tasks/:id/delete', Controller.deleteTask);

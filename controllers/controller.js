@@ -1,5 +1,5 @@
 const { timeRemaining, checkUrgency, countUrgentTasks } = require('../helpers/helper');
-const { User, Task } = require('../models/index')
+const { User, Task, Post, Profile } = require('../models/index')
 const bcrypt = require('bcrypt');
 
 class Controller {
@@ -33,12 +33,6 @@ class Controller {
             const calYear = req.query.year !== undefined ? parseInt(req.query.year) : today.getFullYear();
 
 
-            console.log(user);
-
-
-            console.log(tasks);
-            console.log(taskCompleted);
-            console.log(taskUnfinish);
             res.render('dashboard', { tasks, role: 'student', user, taskCompleted, taskUnfinish, timeRemaining, checkUrgency, countUrgentTasks, calMonth, calYear });
         } catch (error) {
             console.log(error);
@@ -48,9 +42,11 @@ class Controller {
 
     static async adminDashboard(req, res) {
         try {
-            res.send('Admin')
-            // const tasks = await Task.findAll({ include: 'User' }); // semua task, semua user
-            // res.render('dashboard', { tasks, role: 'admin' });
+            const totalUsers = await User.count();
+            const totalTasks = await Task.count();
+            const totalPosts = await Post.count();
+            const completedTasks = await Task.count({ where: { isCompleted: true } });
+            res.render('adminDashboard', { totalUsers, totalTasks, totalPosts, completedTasks });
         } catch (error) {
             res.send(error);
         }
@@ -58,8 +54,29 @@ class Controller {
 
     static async manageUsers(req, res) {
         try {
-            const users = await User.findAll();
-            res.render('manageUsers', { users });
+            const users = await User.findAll({ order: [['id', 'ASC']] });
+            res.render('manageUsers', { users, sessionUserId: req.session.userId });
+        } catch (error) {
+            res.send(error);
+        }
+    }
+
+    static async updateUserRole(req, res) {
+        try {
+            const { id } = req.params;
+            const { role } = req.body;
+
+            if (!['student', 'admin'].includes(role)) {
+                return res.status(400).send('Role tidak valid.');
+            }
+
+            // admin tidak boleh mengubah role akunnya sendiri agar tidak terkunci
+            if (Number(id) === req.session.userId) {
+                return res.status(403).send('Tidak bisa mengubah role akun sendiri.');
+            }
+
+            await User.update({ role }, { where: { id } });
+            res.redirect('/admin/users');
         } catch (error) {
             res.send(error);
         }
@@ -67,9 +84,10 @@ class Controller {
 
     static async postRegister(req, res) {
         try {
-            const { name, email, password, role } = req.body;
+            const { name, email, password } = req.body;
 
-            await User.create({ name, email, password, role });
+            // role tidak boleh diambil dari input user — semua pendaftar adalah student
+            await User.create({ name, email, password, role: 'student' });
 
             res.redirect('/login');
         } catch (error) {
@@ -94,10 +112,6 @@ class Controller {
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ where: { email } });
-            const users = await User.findAll()
-
-            // console.log(user, "<<<");
-            // console.log(users);
 
             if (!user || !(await user.comparePassword(password))) {
                 return res.redirect('/login?error=Email atau password salah'); // Pakai return
@@ -119,35 +133,38 @@ class Controller {
 
     static async logout(req, res) {
         try {
-            req.session.destroy();
-            res.redirect('/login');
+            req.session.destroy(() => {
+                res.redirect('/login');
+            });
         } catch (error) {
             res.send(error);
         }
     }
 
-    static async dashboard(req, res) {
-        try {
-
-        } catch (error) {
-            res.send(error)
-        }
-    }
-
     static async socialFeed(req, res) {
         try {
-
+            const isAdmin = req.session.role === 'admin';
+            const posts = await Post.findAll({
+                include: [{ model: User }],
+                order: [['createdAt', 'DESC']]
+            });
+            res.render('socialFeed', {
+                posts,
+                sessionUserId: req.session.userId,
+                isAdmin,
+                basePath: isAdmin ? '/admin' : '/student'
+            });
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
     static async getAddTask(req, res) {
         try {
-            
+
             let {id} = req.params
 
-            res.render('addTask', {id})
+            res.render('addTask', {id, error: req.query.error || null})
         } catch (error) {
             res.send(error)
         }
@@ -161,11 +178,7 @@ class Controller {
                 title, 
                 courseName, 
                 deadline,
-                userId: req.params.id
-            }, {
-                where: {
-                    userId: req.params.id
-                }
+                userId: req.session.userId
             })
 
             res.redirect('/student')
@@ -176,10 +189,19 @@ class Controller {
 
     static async getEditTask(req, res) {
         try {
+            const isAdmin = req.session.role === 'admin';
+            // admin boleh mengedit task siapa pun; student hanya miliknya sendiri
+            const where = isAdmin
+                ? { id: req.params.id }
+                : { id: req.params.id, userId: req.session.userId };
 
-            let task = await Task.findByPk(req.params.id)
+            let task = await Task.findOne({ where })
 
-            res.render('editTask', {task})
+            if (!task) {
+                return res.status(404).send('Task tidak ditemukan atau bukan milik Anda.')
+            }
+
+            res.render('editTask', { task, basePath: isAdmin ? '/admin' : '/student' })
 
         } catch (error) {
             res.send(error)
@@ -188,22 +210,20 @@ class Controller {
 
     static async postEditTask(req, res) {
         try {
+            const isAdmin = req.session.role === 'admin';
+            const where = isAdmin
+                ? { id: req.params.id }
+                : { id: req.params.id, userId: req.session.userId };
 
             let {title, courseName, deadline} = req.body
 
-            console.log(req.body);
-            console.log(req.params.id);
             await Task.update({
-                title, 
-                courseName, 
+                title,
+                courseName,
                 deadline,
-            }, {
-                where: {
-                    id: req.params.id
-                }
-            })
+            }, { where })
 
-            res.redirect('/student')
+            res.redirect(isAdmin ? '/admin' : '/student')
 
         } catch (error) {
             res.send(error)
@@ -212,73 +232,94 @@ class Controller {
 
     static async getAddFeed(req, res) {
         try {
-
+            res.render('addFeed');
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
     static async postAddFeed(req, res) {
         try {
-
+            const { content } = req.body;
+            await Post.create({ content, userId: req.session.userId });
+            res.redirect('/student/feeds');
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
     static async getEditFeed(req, res) {
         try {
-
+            const isAdmin = req.session.role === 'admin';
+            const { id } = req.params;
+            // admin boleh mengedit post siapa pun; student hanya miliknya sendiri
+            const where = isAdmin ? { id } : { id, userId: req.session.userId };
+            const post = await Post.findOne({ where });
+            if (!post) return res.status(404).send('Post tidak ditemukan atau bukan milik Anda.');
+            res.render('editFeed', { post, basePath: isAdmin ? '/admin' : '/student' });
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
     static async postEditFeed(req, res) {
         try {
-
+            const isAdmin = req.session.role === 'admin';
+            const { id } = req.params;
+            const where = isAdmin ? { id } : { id, userId: req.session.userId };
+            const { content } = req.body;
+            await Post.update({ content }, { where });
+            res.redirect(isAdmin ? '/admin/feeds' : '/student/feeds');
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
     static async taskCompleted(req, res) {
         try {
+            const { id } = req.params;
 
-            await Task.update({
-                isCompleted: true
-            }, {
-                where: {
-                    id: req.params.id
-                }
-            })
+            // ambil task, pastikan milik user yang login
+            const task = await Task.findOne({
+                where: { id, userId: req.session.userId }
+            });
 
-            res.redirect('/student')
+            if (!task) {
+                return res.status(404).send('Task tidak ditemukan atau bukan milik Anda.');
+            }
 
+            // toggle isCompleted
+            await Task.update(
+                { isCompleted: !task.isCompleted },
+                { where: { id, userId: req.session.userId } }
+            );
+
+            res.redirect('/student');
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
     static async deleteFeed(req, res) {
         try {
-
+            const isAdmin = req.session.role === 'admin';
+            const { id } = req.params;
+            const where = isAdmin ? { id } : { id, userId: req.session.userId };
+            await Post.destroy({ where });
+            res.redirect(isAdmin ? '/admin/feeds' : '/student/feeds');
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 
     static async deleteTask(req, res) {
         try {
+            const isAdmin = req.session.role === 'admin';
+            const { id } = req.params;
+            const where = isAdmin ? { id } : { id, userId: req.session.userId };
+            await Task.destroy({ where })
 
-            let { id } = req.params
-            await Task.destroy({
-                where:{
-                    id
-                }
-            })
-
-            res.redirect('/student')
+            res.redirect(isAdmin ? '/admin' : '/student')
         } catch (error) {
             res.send(error)
         }
@@ -286,9 +327,12 @@ class Controller {
 
     static async profile(req, res) {
         try {
-
+            const user = await User.findByPk(req.session.userId, {
+                include: [{ model: Profile }]
+            });
+            res.render('profile', { user });
         } catch (error) {
-            res.send(error)
+            res.send(error);
         }
     }
 }

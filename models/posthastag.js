@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       PostHastag.belongsTo(models.Post, { foreignKey: 'postId' });
-      PostHastag.belongsTo(models.Hastag, { foreignKey: 'hastagId' });
+      PostHastag.belongsTo(models.Hastag, { foreignKey: 'hashtagId' });
     }
     
   }

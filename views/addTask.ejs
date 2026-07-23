@@ -13,12 +13,20 @@
   <div class="modal fade show" id="addTaskModal" tabindex="-1" aria-hidden="true" style="display: block; background: rgba(0,0,0,0.5);">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 shadow-sm rounded-4 p-4">
-        
+
         <div class="d-flex justify-content-between align-items-center mb-1">
           <h5 class="fw-bold mb-0">New Task</h5>
-          <a href="/dashboard" type="button" class="btn-close shadow-none" aria-label="Close"></a>
+          <a href="/student" type="button" class="btn-close shadow-none" aria-label="Close"></a>
         </div>
         <p class="text-muted small mb-4">Add a task to your list</p>
+
+        <% if (error) { %>
+        <div class="alert alert-danger py-2 small">
+          <% error.split(',').forEach(element => { %>
+            <div><%= element %></div>
+          <% }) %>
+        </div>
+        <% } %>
   
         <form action="/student/tasks/<%= id %>/add" method="POST">
           <div class="mb-3">

@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 
 app.use(session({
-    secret: 'secret-key',
+    secret: process.env.SESSION_SECRET || 'remindedu-dev-secret',
     resave: false,
     saveUninitialized: false,
 }));

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in — RemindEdu</title>
+    <title>Sign up — RemindEdu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/login.css">
@@ -64,13 +64,18 @@
         <!-- RIGHT: login form -->
         <section class="login-form-panel">
             <div class="login-form">
+                <% if (error) { %>
+                <div class="py-2" style="padding: 15px;border-left: 2px solid red;background-color: rgb(248, 229, 229);margin-bottom: 20px;">
+                    <%= error %>
+                </div>
+                <% } %>
                 <h2 class="login-form__title">Sign Up</h2>
-                <p class="login-form__subtitle">Sign in to access your dashboard, tasks, and feed.</p>
+                <p class="login-form__subtitle">Create your account to access your dashboard, tasks, and feed.</p>
 
-                <form action="#" method="post" novalidate>
+                <form action="/register" method="post" novalidate>
                     <div class="field">
-                        <label for="email">Username</label>
-                        <input type="username" class="form-control" id="username" name="name" placeholder="username"
+                        <label for="username">Name</label>
+                        <input type="text" class="form-control" id="username" name="name" placeholder="Your name"
                             autocomplete="username" required
                             style="padding: 10px; width: 100%;border-radius: 8px;border: 1px solid gainsboro;">
                     </div>
@@ -87,27 +92,15 @@
                         </div>
                         <div class=" password-input">
                             <input type="password" id="password" name="password" placeholder="Enter your password"
-                                autocomplete="current-password" required>
-                            <button type="button" class="password-toggle" aria-label="Show password">👁</button>
+                                autocomplete="new-password" required>
+                            <button type="button" id="togglePass" class="password-toggle" aria-label="Show password">👁</button>
                         </div>
                     </div>
 
-                    <div class="field">
-                        <div class="field__label-row">
-                            <label for="role">Role</label>
-                        </div>
-                        <div class="select-input">
-                            <select id="role" name="role" required>
-                                <option value="" disabled selected>Select your role</option>
-                                <option value="student">Student</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-                    </div>
+                    <button type="submit" class="btn-primary">Sign up <span class="arrow">→</span></button>
 
-                    <a href="/login" class="text-decoration-none">
-                        <button type="submit" class="btn-primary">Sign in <span class="arrow">→</span></button>
-                    </a>
+                    <p class="signup-line">Already have an account? <a href="/login"
+                            class="link-inline link-inline--bold">Log in</a></p>
 
                 </form>
             </div>

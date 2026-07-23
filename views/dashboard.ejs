@@ -23,13 +23,13 @@
       </a>
 
       <div class="nav-pill-group d-none d-md-flex mx-auto">
-        <a href="/" class="nav-pill-item active">
+        <a href="/student" class="nav-pill-item active">
           <i class="bi bi-bar-chart"></i> Dashboard
         </a>
-        <a href="social-feed.html" class="nav-pill-item">
+        <a href="/student/feeds" class="nav-pill-item">
           <i class="bi bi-layers"></i> Social Feed
         </a>
-        <a href="profile.html" class="nav-pill-item">
+        <a href="/student/profile" class="nav-pill-item">
           <i class="bi bi-journal-bookmark"></i> Profile
         </a>
       </div>
@@ -230,13 +230,15 @@
 
             <% taskUnfinish.forEach(element => { %>
             <div class="task-row d-flex align-items-center gap-3">
-              <a href="/student/tasks/<%= element.id %>" class="task-check" aria-label="Mark task complete" title="Mark as complete"></a>
+              <form method="POST" action="/student/tasks/<%= element.id %>" class="d-inline-flex m-0">
+               <button type="submit" class="task-check" aria-label="Mark task complete" title="Mark as complete"></button>
+              </form>
               <div class="flex-grow-1">
                 <div class="task-title"><%= element.title %></div>
                 <div class="task-meta">
                   <span class="tag-inline tag-inline--blue"><%= element.courseName %></span>
                   <span class="task-due"><i class="bi bi-clock"></i> <%= element.formatDeadLine(element.deadline) %></span>
-                  <span class="tag-urgent"><%= checkUrgency(timeRemaining(element.dealine)) %></span>
+                  <span class="tag-urgent"><%= checkUrgency(timeRemaining(element.deadline)) %></span>
                 </div>
               </div>
               <div class="task-actions">
@@ -271,3 +273,4 @@
 
 </body>
 </html>
+
