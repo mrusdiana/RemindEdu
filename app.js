@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 
 app.use(session({
-    secret: 'ganti-dengan-string-rahasia',
+    secret: 'secret-key',
     resave: false,
     saveUninitialized: false,
 }));

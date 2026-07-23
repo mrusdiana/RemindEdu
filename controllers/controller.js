@@ -1,4 +1,5 @@
-const { User, Task } = require('../models')
+const { User, Task } = require('../models/index')
+const bcrypt = require('bcrypt');
 
 class Controller {
 
@@ -20,8 +21,9 @@ class Controller {
 
     static async studentDashboard(req, res) {
         try {
-            const tasks = await Task.findAll({ where: { userId: req.session.userId } });
-            res.render('dashboard', { tasks, role: 'student' });
+            res.send('Halo')
+            // const tasks = await Task.findAll({ where: { userId: req.session.userId } });
+            // res.render('dashboard', { tasks, role: 'student' });
         } catch (error) {
             res.send(error);
         }
@@ -29,8 +31,9 @@ class Controller {
     
     static async adminDashboard(req, res) {
         try {
-            const tasks = await Task.findAll({ include: 'User' }); // semua task, semua user
-            res.render('dashboard', { tasks, role: 'admin' });
+            res.send('Admin')
+            // const tasks = await Task.findAll({ include: 'User' }); // semua task, semua user
+            // res.render('dashboard', { tasks, role: 'admin' });
         } catch (error) {
             res.send(error);
         }
@@ -61,7 +64,7 @@ class Controller {
     
     static async login(req, res) {
         try {
-            res.render('login', { error: req.query.error || null }); // GET — tampilin form
+            res.render('login', { error: req.query.error || null }); 
         } catch (error) {
             res.send(error);
         }
@@ -71,20 +74,26 @@ class Controller {
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ where: { email } });
+            const users = await User.findAll()
+
+            // console.log(user, "<<<");
+            // console.log(users);
     
-            if (!user || !user.comparePassword(password)) {
-                return res.redirect('/login?error=Email atau password salah');
+            if (!user || !(await user.comparePassword(password))) {
+                return res.redirect('/login?error=Email atau password salah'); // Pakai return
             }
     
             req.session.userId = user.id;
             req.session.role = user.role;
     
             if (user.role === 'admin') {
-                return res.redirect('/admin');
+                return res.redirect('/admin'); // Pakai return
             }
-            res.redirect('/student');
-        } catch (error) {
-            res.send(error);
+            
+            return res.redirect('/student'); // Pakai return
+        } catch (err) {
+            console.log(err);
+            res.send(err);
         }
     }
     
@@ -94,14 +103,6 @@ class Controller {
             res.redirect('/login');
         } catch (error) {
             res.send(error);
-        }
-    }
-
-    static async login(req, res){
-        try {
-            
-        } catch (error) {
-            res.send(error)
         }
     }
 

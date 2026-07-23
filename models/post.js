@@ -9,9 +9,10 @@ module.exports = (sequelize, DataTypes) => {
       Post.belongsTo(models.User, {
         foreignKey:'userId'
       }),
-      Post.hasMany(models.PostHastag, {
-        foreignKey:'postId'
-      })
+      Post.belongsToMany(models.Hastag, {
+        through: models.PostHastag,
+        foreignKey: 'postId'
+      });
     }
     
   }

@@ -1,0 +1,251 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* Mencegah scrollbar vertikal */
+  font-family: 'Inter', sans-serif;
+}
+
+.login-page {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Bagian Kiri (Hero) */
+.login-hero {
+  flex: 1; /* Mengambil separuh layar */
+  background-color: #2563eb;
+  position: relative;
+  overflow: hidden;
+  padding: 35px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.brand__name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.hero {
+  margin: 5px 0;
+}
+
+.login-hero__title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.login-hero__subtitle {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.login-hero__features {
+  list-style: none;
+}
+
+.check {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.login-hero__features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+.testimonial {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 14px;
+  border-radius: 14px;
+  width: 100%;
+}
+
+.testimonial__stars {
+  color: #ffc107;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+.testimonial__quote {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+.testimonial__author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.testimonial__avatar {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.testimonial__name {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.75rem;
+}
+
+.testimonial__role {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* Bagian Kanan (Form Panel) - Center Full */
+.login-form-panel {
+  flex: 1; /* Mengambil separuh layar bagian kanan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.login-form {
+  background-color: #ffffff;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-form__title {
+  margin-bottom: 6px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.login-form__subtitle {
+  color: #6c757d;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label,
+.field__label-row label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.field input[type="email"],
+.password-input input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+}
+
+.field__label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 11px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+.signup-line {
+  text-align: center;
+  margin-top: 18px;
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.link-inline {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.link-inline:hover {
+  text-decoration: underline;
+}

@@ -6,9 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   class Hastag extends Model {
 
     static associate(models) {
-      Hastag.hasMany(models.PostHastag, {
-        foreignKey:'hastagId'
-      })
+      Hastag.belongsToMany(models.Post, {
+        through: models.PostHastag, 
+        foreignKey: 'hastagId'
+      });
     }
     
   }
