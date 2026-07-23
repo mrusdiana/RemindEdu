@@ -232,7 +232,7 @@ body {
   color: var(--text);
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* ---------- resposive ---------- */
 
 @media (max-width: 767.98px) {
   .nav-pill-item span { display: none; }
