@@ -1,5 +1,6 @@
-const { User, Task } = require('../models/index')
+const { User, Task, Post } = require('../models/index')
 const bcrypt = require('bcrypt');
+const post = require('../models/post');
 
 class Controller {
 
@@ -121,8 +122,11 @@ class Controller {
 
     static async socialFeed(req, res){
         try {
-            
+            const post = await Post.findAll({ where: { userId: req.session.userId } });
+            let user = await User.findByPk(req.session.userId )
+            res.render('socialFeed')
         } catch (error) {
+            console.log(error);
             res.send(error)
         }
     }
