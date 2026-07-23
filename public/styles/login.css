@@ -1,0 +1,257 @@
+.login-page {
+    display: flex;
+    height: 100vh;
+}
+
+.login-hero {
+    background-color: #2563eb;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    padding: 40px;
+}
+
+.brand__name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.hero {
+    margin: 10px 0;
+}
+
+.login-hero__title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  /* padding: 30px; */
+}
+
+.login-hero__subtitle {
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0px 0;
+}
+
+.login-hero__features {
+  list-style: none;
+  /* margin: 10px; */
+}
+
+.check {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-size: 0.85rem; */
+  font-weight: bold;
+}
+
+.login-hero__features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 16px;
+}
+
+.testimonial {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px); /* Efek kaca frosted glass */
+  padding: 15px;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.testimonial__stars {
+  color: #ffc107; /* Warna emas/kuning bintang */
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.testimonial__quote {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+}
+
+.testimonial__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Avatar Inisial TC */
+.testimonial__avatar {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.testimonial__name {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.7rem;
+}
+
+.testimonial__role {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* ini bagian kanan */
+
+.login-form-panel {
+    padding: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.field__label-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-form-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.login-form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.login-form__title {
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.login-form__subtitle {
+    color: #6c757d;
+    margin-bottom: 24px;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.field label,
+.field__label-row label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.field input[type="email"],
+.password-input input[type="password"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.field__label-row {
+    display: flex;
+    justify-content: space-between;
+    /* Password & Forgot password sejajar kiri-kanan */
+    align-items: center;
+}
+
+.password-input {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #0d6efd;
+    /* Warna biru utama */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+.signup-line {
+    text-align: center;
+    margin-top: 24px;
+    color: #6c757d;
+}
+
+.link-inline {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.link-inline:hover {
+    text-decoration: underline;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+}

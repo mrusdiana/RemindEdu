@@ -18,5 +18,13 @@
   },
   "devDependencies": {
     "sequelize-cli": "^6.6.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrusdiana/RemindEdu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mrusdiana/RemindEdu/issues"
+  },
+  "homepage": "https://github.com/mrusdiana/RemindEdu#readme"
 }
