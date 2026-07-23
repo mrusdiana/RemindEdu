@@ -21,9 +21,13 @@ class Controller {
 
     static async studentDashboard(req, res) {
         try {
-            res.send('Halo')
-            // const tasks = await Task.findAll({ where: { userId: req.session.userId } });
-            // res.render('dashboard', { tasks, role: 'student' });
+            const tasks = await Task.findAll({ where: { userId: req.session.userId } });
+            let user = await User.findByPk(req.session.userId )
+
+            console.log(user);
+
+            console.log(tasks);
+            res.render('dashboard', { tasks, role: 'student' , user});
         } catch (error) {
             res.send(error);
         }
@@ -50,8 +54,9 @@ class Controller {
     
     static async postRegister(req, res) {
         try {
-            const { name, email, password } = req.body;
-            await User.create({ name, email, password, role: 'student' });
+            const { name, email, password, role } = req.body;
+
+            await User.create({ name, email, password, role});
 
             res.redirect('/login');
         } catch (error) {

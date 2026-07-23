@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — RemindEdu</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+
+  <!-- Top navigation -->
+  <nav class="navbar navbar-expand bg-white border-bottom px-3 px-md-4 py-2">
+    <div class="container-fluid p-0">
+
+      <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="/">
+        <span class="brand-icon"><i class="bi bi-mortarboard-fill"></i></span>
+        <span class="brand-text">Remind<span class="text-primary-brand">Edu</span></span>
+      </a>
+
+      <div class="nav-pill-group d-none d-md-flex mx-auto">
+        <a href="/" class="nav-pill-item active">
+          <i class="bi bi-bar-chart"></i> Dashboard
+        </a>
+        <a href="social-feed.html" class="nav-pill-item">
+          <i class="bi bi-layers"></i> Social Feed
+        </a>
+        <a href="profile.html" class="nav-pill-item">
+          <i class="bi bi-journal-bookmark"></i> Profile
+        </a>
+      </div>
+
+      <div class="d-flex align-items-center gap-3 ms-auto ms-md-0">
+        <button class="notif-btn" type="button" aria-label="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="notif-badge">2</span>
+        </button>
+        <span class="avatar-circle">JP</span>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Page content -->
+  <main class="container dashboard-container py-4 py-md-5">
+
+    <!-- Greeting -->
+    <div class="mb-4">
+      <h2 class="fw-bold mb-1">Good afternoon,  <%= user.name %> 👋</h2>
+      <p class="text-muted mb-0"><%= new Date().toLocaleDateString('id-ID') %> &middot; <%= tasks.length %> pending tasks</p>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-md-4">
+        <div class="stat-card stat-card--blue d-flex align-items-center gap-3">
+          <div class="stat-icon"><i class="bi bi-clock-fill"></i></div>
+          <div>
+            <div class="stat-number"><%= tasks.length %></div>
+            <div class="stat-caption">Pending Tasks</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="stat-card stat-card--green d-flex align-items-center gap-3">
+          <div class="stat-icon"><i class="bi bi-check-circle-fill"></i></div>
+          <div>
+            <div class="stat-number">1</div>
+            <div class="stat-caption">Completed</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="stat-card stat-card--yellow d-flex align-items-center gap-3">
+          <div class="stat-icon"><i class="bi bi-bell-fill"></i></div>
+          <div>
+            <div class="stat-number">2</div>
+            <div class="stat-caption">Urgent Deadlines</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- LEFT COLUMN: calendar + nearest deadlines -->
+      <div class="col-12 col-lg-5">
+
+        <div class="card panel-card border-0 shadow-sm mb-4">
+          <div class="card-body p-3 p-md-4">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <h6 class="fw-bold mb-0">July 2026</h6>
+              <div class="d-flex gap-1">
+                <button class="cal-nav-btn" type="button" aria-label="Previous month"><i class="bi bi-chevron-left"></i></button>
+                <button class="cal-nav-btn" type="button" aria-label="Next month"><i class="bi bi-chevron-right"></i></button>
+              </div>
+            </div>
+
+            <table class="calendar-table w-100">
+              <thead>
+                <tr>
+                  <th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+                </tr>
+                <tr>
+                  <td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td>
+                </tr>
+                <tr>
+                  <td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
+                </tr>
+                <tr>
+                  <td>20</td><td>21</td><td class="day-today">22</td><td>23</td><td class="day-deadline">24</td><td>25</td><td>26</td>
+                </tr>
+                <tr>
+                  <td>27</td><td class="day-deadline">28</td><td>29</td><td class="day-deadline">30</td><td>31</td><td></td><td></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="calendar-legend d-flex gap-3 mt-3">
+              <span><i class="legend-dot legend-dot--today"></i> Today</span>
+              <span><i class="legend-dot legend-dot--deadline"></i> Deadline</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card panel-card border-0 shadow-sm">
+          <div class="card-body p-3 p-md-4">
+            <h6 class="fw-bold mb-3"><i class="bi bi-bell text-warning me-1"></i> Nearest Deadlines</h6>
+
+            <div class="deadline-row d-flex align-items-start gap-2">
+              <span class="deadline-dot deadline-dot--blue"></span>
+              <div>
+                <div class="deadline-title">Integration &amp; Derivatives Problem Set</div>
+                <div class="deadline-sub"><span class="tag-inline tag-inline--blue">MATH201</span> Jul 24</div>
+              </div>
+            </div>
+
+            <div class="deadline-row d-flex align-items-start gap-2">
+              <span class="deadline-dot deadline-dot--purple"></span>
+              <div>
+                <div class="deadline-title">Lab Report: Wave Motion Experiment</div>
+                <div class="deadline-sub"><span class="tag-inline tag-inline--purple">PHYS101</span> Jul 28</div>
+              </div>
+            </div>
+
+            <div class="deadline-row d-flex align-items-start gap-2 mb-0">
+              <span class="deadline-dot deadline-dot--red"></span>
+              <div>
+                <div class="deadline-title">Essay: Modernism in American Literature</div>
+                <div class="deadline-sub"><span class="tag-inline tag-inline--red">LIT105</span> Jul 30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: task list -->
+      <div class="col-12 col-lg-7">
+        <div class="card panel-card border-0 shadow-sm">
+          <div class="card-body p-3 p-md-4">
+
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <h6 class="fw-bold mb-0">My Tasks</h6>
+              <!-- GET /tasks/add -->
+              <a href="/tasks/add" class="btn btn-add-task">
+                <i class="bi bi-plus-lg"></i> Add Task
+              </a>
+            </div>
+            <p class="text-muted small mb-3">4 remaining, 1 done</p>
+
+            <% tasks.forEach(element => { %>
+            <!-- Task 1 -->
+            <div class="task-row d-flex align-items-center gap-3">
+              <a href="/tasks/1" class="task-check" aria-label="Mark task complete" title="Mark as complete"></a>
+              <div class="flex-grow-1">
+                <div class="task-title">Integration &amp; Derivatives Problem Set</div>
+                <div class="task-meta">
+                  <span class="tag-inline tag-inline--blue"><%=  %></span>
+                  <span class="task-due"><i class="bi bi-clock"></i> Due Jul 24</span>
+                  <span class="tag-urgent">Urgent</span>
+                </div>
+              </div>
+              <div class="task-actions">
+                <!-- GET /tasks/1/edit -->
+                <a href="/tasks/1/edit" class="icon-action" aria-label="Edit task" title="Edit"><i class="bi bi-pencil"></i></a>
+                <!-- GET /tasks/1/delete -->
+                <a href="/tasks/1/delete" class="icon-action icon-action--danger" aria-label="Delete task" title="Delete"><i class="bi bi-trash"></i></a>
+              </div>
+            </div>
+            <% }) %>
+
+        
+
+            <!-- Overall progress -->
+            <div class="progress-section mt-4">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="progress-label">Overall Progress</span>
+                <span class="progress-label">1 / 5 completed</span>
+              </div>
+              <div class="progress custom-progress">
+                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
