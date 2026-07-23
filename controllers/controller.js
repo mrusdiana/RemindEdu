@@ -34,7 +34,7 @@ class Controller {
 
     static async socialFeed(req, res){
         try {
-            
+            res.render('socialFeed')
         } catch (error) {
             res.send(error)
         }
