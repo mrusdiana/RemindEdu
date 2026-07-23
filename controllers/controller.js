@@ -1,6 +1,7 @@
 const { timeRemaining, checkUrgency, countUrgentTasks } = require('../helpers/helper');
 const { User, Task, Post, Profile } = require('../models/index')
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 
 class Controller {
 
@@ -101,8 +102,8 @@ class Controller {
     static async login(req, res) {
         try {
             // let {error} = decodeURIComponent(req.query)
-           
-            res.render('login', { error: req.query.error || null});
+
+            res.render('login', { error: req.query.error || null });
         } catch (error) {
             res.send(error);
         }
@@ -143,18 +144,37 @@ class Controller {
 
     static async socialFeed(req, res) {
         try {
+            const { search } = req.query;
             const isAdmin = req.session.role === 'admin';
-            const posts = await Post.findAll({
-                include: [{ model: User }],
-                order: [['createdAt', 'DESC']]
-            });
+
+
+            const options = {
+                where: {},
+                include: {
+                    model: User
+                },
+                order:
+                    [['createdAt', 'DESC']]
+            };
+
+            if (search) {
+                options.where.content = {
+                    [Op.iLike]: `%${search}%`
+                };
+            }
+
+            let posts = await Post.findAll(options);
+
+            console.log(posts);
+
             res.render('socialFeed', {
                 posts,
                 sessionUserId: req.session.userId,
                 isAdmin,
-                basePath: isAdmin ? '/admin' : '/student'
+                basePath: isAdmin ? '/admin' : '/student',
             });
         } catch (error) {
+            console.log(error);
             res.send(error);
         }
     }
@@ -162,21 +182,21 @@ class Controller {
     static async getAddTask(req, res) {
         try {
 
-            let {id} = req.params
+            let { id } = req.params
 
-            res.render('addTask', {id, error: req.query.error || null})
+            res.render('addTask', { id, error: req.query.error || null })
         } catch (error) {
             res.send(error)
         }
     }
 
     static async postAddTask(req, res) {
-        try {  
+        try {
 
-            let {title, courseName, deadline} = req.body
+            let { title, courseName, deadline } = req.body
             await Task.create({
-                title, 
-                courseName, 
+                title,
+                courseName,
                 deadline,
                 userId: req.session.userId
             })
@@ -215,7 +235,7 @@ class Controller {
                 ? { id: req.params.id }
                 : { id: req.params.id, userId: req.session.userId };
 
-            let {title, courseName, deadline} = req.body
+            let { title, courseName, deadline } = req.body
 
             await Task.update({
                 title,
