@@ -82,7 +82,9 @@ class Controller {
 
     static async login(req, res) {
         try {
-            res.render('login', { error: req.query.error || null });
+            // let {error} = decodeURIComponent(req.query)
+           
+            res.render('login', { error: req.query.error || null});
         } catch (error) {
             res.send(error);
         }
@@ -242,6 +244,16 @@ class Controller {
 
     static async taskCompleted(req, res) {
         try {
+
+            await Task.update({
+                isCompleted: true
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.redirect('/student')
 
         } catch (error) {
             res.send(error)
