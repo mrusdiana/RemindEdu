@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       return `Due ${formattedDate} (${diffDays} days left)`;
     }
 
+    get formatDate(){
+      return this.deadline.toISOString().split('T')[0]
+    }
+
     static async updateProgressBar(tasks) {
       const totalTasks = tasks.length;
       const completedTasks = tasks.filter(t => t.isCompleted).length;

@@ -175,6 +175,10 @@ class Controller {
     static async getEditTask(req, res) {
         try {
 
+            let task = await Task.findByPk(req.params.id)
+
+            res.render('editTask', {task})
+
         } catch (error) {
             res.send(error)
         }
@@ -182,6 +186,22 @@ class Controller {
 
     static async postEditTask(req, res) {
         try {
+
+            let {title, courseName, deadline} = req.body
+
+            console.log(req.body);
+            console.log(req.params.id);
+            await Task.update({
+                title, 
+                courseName, 
+                deadline,
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            })
+
+            res.redirect('/student')
 
         } catch (error) {
             res.send(error)
@@ -239,6 +259,14 @@ class Controller {
     static async deleteTask(req, res) {
         try {
 
+            let { id } = req.params
+            await Task.destroy({
+                where:{
+                    id
+                }
+            })
+
+            res.redirect('/student')
         } catch (error) {
             res.send(error)
         }

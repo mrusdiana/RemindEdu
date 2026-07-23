@@ -247,9 +247,9 @@
               </div>
               <div class="task-actions">
                 <!-- GET /tasks/1/edit -->
-                <a href="/tasks/1/edit" class="icon-action" aria-label="Edit task" title="Edit"><i class="bi bi-pencil"></i></a>
+                <a href="/student/tasks/<%= element.id %>/edit" class="icon-action" aria-label="Edit task" title="Edit"><i class="bi bi-pencil"></i></a>
                 <!-- GET /tasks/1/delete -->
-                <a href="/tasks/1/delete" class="icon-action icon-action--danger" aria-label="Delete task" title="Delete"><i class="bi bi-trash"></i></a>
+                <a href="/student/tasks/<%= element.id %>/delete" class="icon-action icon-action--danger" aria-label="Delete task" title="Delete"><i class="bi bi-trash"></i></a>
               </div>
             </div>
             <% }) %>
