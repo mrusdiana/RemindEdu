@@ -1,21 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/styles/homeScreen.css">
+    <title>RemindEdu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/styles/homePage.css">
 </head>
-<body>
-    <nav class="nav">
 
+<body data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="100" data-bs-smooth-scroll="true"
+    tabindex="0">
+    <nav class="navbar navbar-expand-md navbar-light custom-blur-nav fixed-top py-3 px-4 shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center gap-2 text-decoration-none" href="/">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                        stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7" />
+                    </svg>
+                </div>
+                <span class="fw-bold fs-4 text-dark">Remind<span class="text-primary">Edu</span></span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <div class="mx-auto">
+                    <div class="nav-pill-container d-flex align-items-center p-1">
+                        <ul class="nav nav-pills gap-1 mb-0">
+                            <li class="nav-item">
+                                <a href="#features" class="nav-link nav-pill-item px-3 py-2">Features</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#how-it-works" class="nav-link nav-pill-item px-3 py-2">How it Works</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#testimonials" class="nav-link nav-pill-item px-3 py-2">Testimonials</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <a href="/login" class="text-dark fw-medium text-decoration-none px-2">Log in</a>
+                    <a href="/register" class="btn btn-primary rounded-pill px-4 py-2 shadow-sm">Sign up free</a>
+                </div>
+
+            </div>
+        </div>
     </nav>
-    <div class="container-1">
 
-        <p>halo</p>
-       
-    </div>
+    <main>
+        <section class="hero-section py-5" id="features">
+            <div class="container py-4 section-features">
+                <div class="row align-items-center g-5 mb-5">
+                    <div class="col-lg-6 text-start">
+                        <div
+                            class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill trusted-capsule mb-4 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
+                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-primary">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                            <span class="fw-medium text-primary small">Trusted by 12,000+ students across 40+
+                                universities</span>
+                        </div>
 
+                        <h1 class="display-4 fw-bold text-dark tracking-tight mb-0">
+                            Study smarter,
+                        </h1>
+                        <h1 class="display-4 fw-bold text-primary mb-3">
+                            never miss a deadline.
+                        </h1>
 
+                        <p class="text-secondary lead fs-6 mb-4">
+                            RemindEdu combines a smart task calendar, course-aware to-do lists, and a student social
+                            feed — everything you need to stay organised and connected through university.
+                        </p>
+
+                        <div class="d-flex flex-wrap align-items-center gap-3">
+                            <a href="/register"
+                                class="btn btn-primary btn-lg rounded-pill px-4 py-3 shadow-sm d-flex align-items-center gap-2 fw-medium fs-6">
+                                Get started — it's free
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none"
+                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </a>
+                            <a href="/login"
+                                class="btn btn-light btn-lg rounded-pill px-4 py-3 border shadow-sm fw-medium fs-6 text-dark">
+                                Log in to your account
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 text-center">
+                        <div class="hero-image-container position-relative">
+                            <img src="/assets/portrait-young-woman-student-with-notebooks-earphones-her-neck-posing-college.jpg"
+                                alt="Student Studying" class="img-fluid rounded-4 shadow-lg w-100"
+                                style="max-height: 480px; object-fit: cover;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-py-0 text-start mt-5 d-flex flex-wrap">
+                <div class="col-lg-7">
+                    <img src="/assets/Tangkapan Layar 0008-07-23 pukul 00.01.34.png" alt="" srcset="" width="100%">
+                </div>
+                <div class="px-5 justify-content-start" style="width: 41%;flex-grow: 2;">
+                    <h1 class="display-4 fw-bold text-dark tracking-tight mb-0 mt-5">
+                        Lets <span class="text-primary">Try !</span>
+                    </h1>
+                    <p class="mt-3 p-3 text-secondary fs-5">"Stay on top of your assignments, exams, and university
+                        schedule effortlessly."</p>
+                </div>
+            </div>
+            <div class="col-lg-6 d-flex flex-wrap w-100 justify-content-center py-2 p-5"
+                style="background-color: #F9FAFB;border-top:1px solid #cacbcb;border-bottom: 1px solid #cacbcb;">
+                <div class="py-4 p-3 mx-5 text-center text-primary" style="font-family:Poppins;">
+                    <h3 class="fw-bold">12K+</h3>
+                    <p class="text-secondary lead" style="font-size: 1rem;">Active Student</p>
+                </div>
+                <div class="py-4 p-3 mx-5 text-center text-primary" style="font-family:Poppins;">
+                    <h3 class="fw-bold">98%</h3>
+                    <p class="text-secondary lead" style="font-size: 1rem;">Deadline Hit Rate</p>
+                </div>
+                <div class="py-4 p-3 mx-5 text-center text-primary" style="font-family:Poppins;">
+                    <h3 class="fw-bold">40+</h3>
+                    <p class="text-secondary lead" style="font-size: 1rem;">Universities</p>
+                </div>
+                <div class="py-4 p-3 mx-5 text-center text-primary" style="font-family:Poppins;">
+                    <h3 class="fw-bold">4.9 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                            fill="currentColor" class="bi bi-star-fill mb-2" viewBox="0 0 16 16">
+                            <path
+                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg></h3>
+                    <p class="text-secondary lead" style="font-size: 1rem;">Average Rating</p>
+                </div>
+            </div>
+
+            <div class="text-center w-50 mx-auto p-3 my-5">
+                <p class="text-primary">EVERTYTHING YOU NEED</p>
+                <h1 class="fw-bold">Built For Student</h1>
+                <p class="lead text-secondary">Every feature in RemindEdu was designed around how university students
+                    actually work — not how productivity gurus think they should.</p>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card h-100">
+                            <div class="icon bg-primary-subtle text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-calendar-check" viewBox="0 0 16 16">
+                                    <path
+                                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+                                    <path
+                                        d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                </svg>
+                            </div>
+
+                            <h5>Smart Deadline Calendar</h5>
+                            <p>Visual calendar highlights your deadlines so you never miss a submission. Stay ahead with automatic reminders.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card h-100">
+                            <div class="icon bg-success-subtle text-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-check-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                    <path
+                                        d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
+                                </svg>
+                            </div>
+
+                            <h5>Task Management</h5>
+                            <p>Create, organise, and track tasks by course. Checkboxes, urgency labels, and progress bars keep you on track.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card h-100">
+                            <div class="icon bg-info-subtle text-info">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-people" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+                                </svg>
+                            </div>
+
+                            <h5>Student Social Feed</h5>
+                            <p>Connect with classmates, share study notes, ask questions, and follow course hashtags in a clean timeline.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card h-100">
+                            <div class="icon bg-warning-subtle text-warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-stars" viewBox="0 0 16 16">
+                                    <path
+                                        d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+                                </svg>
+                            </div>
+
+                            <h5>Study Insights</h5>
+                            <p>Track completion rates and productivity trends across all your courses at a glance.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card h-100">
+                            <div class="icon bg-danger-subtle text-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-shield-lock" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56" />
+                                    <path
+                                        d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415" />
+                                </svg>
+                            </div>
+
+                            <h5>Private & Secure</h5>
+                            <p>Your academic data stays safe. University-grade security with two-factor authentication support.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card h-100">
+                            <div class="icon bg-info-subtle text-info">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-lightning-charge" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z" />
+                                </svg>
+                            </div>
+
+                            <h5>Lightning Fast</h5>
+                            <p>Built for speed. Open the app, see what's due — no bloat,no wait. Works offline too.</p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonial-section py-5">
+            <div class="container">
+                <p class="section-label text-center mb-2">
+                    STUDENT VOICES
+                </p>
+                <h2 class="section-title text-center mb-5">
+                    Loved by students
+                </h2>
+                <div class="row g-4">
+
+                    <% const testimonials = [ 
+                    { initials:"SK", 
+                      color:"primary", 
+                      name:"Sasha K.", 
+                      major:"Engineering", 
+                      Year: 2, 
+                      review:"RemindEdu changed how I manage deadlines. The calendar view is exactly what I needed during finals week."
+                    }, { 
+                      initials:"LT", 
+                      color:"success", 
+                      name:"Leo Torres", 
+                      major:"Business Admin",
+                      Year: 3, 
+                      review:"The social feed is surprisingly useful — I found my study group through a #Statistics post and we aced the exam." 
+                    }, { 
+                      initials:"MS", 
+                      color:"warning", 
+                      name:"Mei Suzuki", 
+                      major:"Mathematics", 
+                      Year: 4, 
+                      review:"Simple, clean, and it just works. I recommend it to my entire cohort. Everyone uses it now." 
+                    }]%>
+
+                    <% testimonials.forEach(item=> { %>
+                        <div class="col-md-4">
+                            <div class="testimonial-card h-100">
+                                <div class="stars mb-3">
+                                    ★★★★★
+                                </div>
+                                <p class="review">
+                                    "<%= item.review %>"
+                                </p>
+                                <div class="d-flex align-items-center mt-4">
+                                    <div class="avatar bg-<%= item.color %>-subtle text-<%= item.color %>">
+                                        <%= item.initials %>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0">
+                                            <%= item.name %>
+                                        </h6>
+                                        <small>
+                                            <%= item.major %>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section text-center">
+            <div class="container">
+
+                <h2>Ready to take control of your academics?</h2>
+                <p>Join thousands of students who are already acing their deadlines with RemindEdu.</p>
+
+                <div class="mt-4">
+                    <a href="/register" class="btn btn-light btn-lg px-4 me-2">Create free account</a>
+                    <a href="/login" class="btn btn-outline-light btn-lg px-4">Log in</a>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4 text-center text-md-start">
+                        <h5 class="logo mb-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                        stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14v7" />
+                    </svg>
+                            RemindEdu
+                        </h5>
+                    </div>
+
+                    <div class="col-md-4 text-center my-3 my-md-0">
+                        <small>
+                            © 2026 RemindEdu. Built for students, by students.
+                        </small>
+
+                    </div>
+
+                    <div class="col-md-4 text-center text-md-end">
+                        <a href="#">Privacy</a>
+                        <a href="#" class="mx-3">Terms</a>
+                        <a href="#">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

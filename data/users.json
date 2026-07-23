@@ -1,0 +1,66 @@
+[
+    {
+      "id": 1,
+      "name": "Ayu Lestari",
+      "email": "ayu.lestari@gmail.com",
+      "password": "$2b$10$aY8kHq1nZpQeXo2vLdRt.eKb9sD4gWmT1cVn6uJhFxRq3wPzL0YoK",
+      "createdAt": "2026-01-05T08:00:00.000Z",
+      "updatedAt": "2026-01-05T08:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Budi Santoso",
+      "email": "budi.santoso@gmail.com",
+      "password": "$2b$10$bZ9lIr2oAqRfYp3wMeSu.fLc0tE5hXnU2dWo7vKiGyRs4xQaM1ZpL",
+      "createdAt": "2026-01-06T09:15:00.000Z",
+      "updatedAt": "2026-01-06T09:15:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Citra Dewi",
+      "email": "citra.dewi@gmail.com",
+      "password": "$2b$10$cA0mJs3pBrSgZq4xNfTv.gMd1uF6iYoV3eXp8wLjHzSt5yRbN2AqM",
+      "createdAt": "2026-01-08T10:20:00.000Z",
+      "updatedAt": "2026-01-08T10:20:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Dimas Prakoso",
+      "email": "dimas.prakoso@gmail.com",
+      "password": "$2b$10$dB1nKt4qCsThAr5yOgUw.hNe2vG7jZpW4fYq9xMkIzAu6zScO3BrN",
+      "createdAt": "2026-01-10T07:45:00.000Z",
+      "updatedAt": "2026-01-10T07:45:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Eka Putri",
+      "email": "eka.putri@gmail.com",
+      "password": "$2b$10$eC2oLu5rDtUiBs6zPhVx.iOf3wH8kAqX5gZr0yNlJaBv7aTdP4CsO",
+      "createdAt": "2026-01-12T11:30:00.000Z",
+      "updatedAt": "2026-01-12T11:30:00.000Z"
+    },
+    {
+      "id": 6,
+      "name": "Fajar Nugroho",
+      "email": "fajar.nugroho@gmail.com",
+      "password": "$2b$10$fD3pMv6sEuVjCt7aQiWy.jPg4xI9lBrY6hAs1zOmKbCw8bUeQ5DtP",
+      "createdAt": "2026-01-14T13:00:00.000Z",
+      "updatedAt": "2026-01-14T13:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "name": "Gita Ananda",
+      "email": "gita.ananda@gmail.com",
+      "password": "$2b$10$gE4qNw7tFvWkDu8bRjXz.kQh5yJ0mCsZ7iBt2aPnLcDx9cVfR6EuQ",
+      "createdAt": "2026-01-16T08:50:00.000Z",
+      "updatedAt": "2026-01-16T08:50:00.000Z"
+    },
+    {
+      "id": 8,
+      "name": "Hendra Wijaya",
+      "email": "hendra.wijaya@gmail.com",
+      "password": "$2b$10$hF5rOx8uGwXlEv9cSkYz.lRi6zK1nDtA8jCu3bQoMdEy0dWgS7FvR",
+      "createdAt": "2026-01-18T14:40:00.000Z",
+      "updatedAt": "2026-01-18T14:40:00.000Z"
+    }
+  ]

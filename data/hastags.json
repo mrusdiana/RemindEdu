@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "produktif",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 2,
+        "name": "kuliah",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 3,
+        "name": "ngoding",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 4,
+        "name": "basisdata",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 5,
+        "name": "desain",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 6,
+        "name": "belajar",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 7,
+        "name": "jaringankomputer",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+        "id": 8,
+        "name": "skripsi",
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z"
+    }
+]

@@ -1,0 +1,58 @@
+[
+    {
+      "id": 1,
+      "userId": 1,
+      "content": "Akhirnya tugas struktur data selesai juga 🎉",
+      "createdAt": "2026-07-15T09:00:00.000Z",
+      "updatedAt": "2026-07-15T09:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "content": "Ngerjain laporan praktikum sambil ngopi ☕",
+      "createdAt": "2026-07-01T18:30:00.000Z",
+      "updatedAt": "2026-07-01T18:30:00.000Z"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "content": "Belajar Figma seharian, semoga hasil UI-nya oke",
+      "createdAt": "2026-07-20T20:10:00.000Z",
+      "updatedAt": "2026-07-20T20:10:00.000Z"
+    },
+    {
+      "id": 4,
+      "userId": 4,
+      "content": "Subnetting itu susah tapi seru juga kalau udah paham",
+      "createdAt": "2026-07-19T15:45:00.000Z",
+      "updatedAt": "2026-07-19T15:45:00.000Z"
+    },
+    {
+      "id": 5,
+      "userId": 5,
+      "content": "Selesai edit video tugas, tinggal upload 🎬",
+      "createdAt": "2026-07-11T21:00:00.000Z",
+      "updatedAt": "2026-07-11T21:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "content": "Semangat revisi skripsi, semoga cepat sidang 🙏",
+      "createdAt": "2026-07-18T07:20:00.000Z",
+      "updatedAt": "2026-07-18T07:20:00.000Z"
+    },
+    {
+      "id": 7,
+      "userId": 6,
+      "content": "Machine learning makin menarik kalau dipelajari pelan-pelan",
+      "createdAt": "2026-07-21T16:00:00.000Z",
+      "updatedAt": "2026-07-21T16:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "userId": 8,
+      "content": "Malam ini begadang demi kalkulus, doakan lancar",
+      "createdAt": "2026-07-22T23:15:00.000Z",
+      "updatedAt": "2026-07-22T23:15:00.000Z"
+    }
+  ]
