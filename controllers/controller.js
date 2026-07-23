@@ -16,6 +16,14 @@ class Controller {
         }
     }
 
+    static async signUp(req, res){
+        try {
+            res.render('signUp')
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
     static async dashboard(req, res){
         try {
             
