@@ -130,7 +130,7 @@ class Controller {
 
     static async profile(req, res){
         try {
-            
+            res.render('profile')
         } catch (error) {
             res.send(error)
         }

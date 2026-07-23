@@ -10,6 +10,6 @@ router.get('/login', Controller.login)
 router.get('/signUp', Controller.signUp)
 router.use('/dashboards', dashboardRoute)
 router.use('/socialFeeds', socialFeedRoute)
-router.use('/profiles', profileRoute)
+router.use('/profiles', Controller.profile)
 
 module.exports = router
