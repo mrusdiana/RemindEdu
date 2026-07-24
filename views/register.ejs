@@ -13,15 +13,18 @@
 <body>
 
     <div class="login-page">
-
-        <!-- LEFT: hero / marketing panel -->
         <section class="login-hero">
             <div class="login-hero__decor login-hero__decor--one"></div>
             <div class="login-hero__decor login-hero__decor--two"></div>
 
             <div class="login-hero__content">
                 <div class="brand">
-                    <span class="brand__mark"></span>
+                    <span class="brand__mark">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z" fill="#fff"/>
+                          <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" fill="#fff"/>
+                        </svg>
+                      </span>
                     <span class="brand__name">RemindEdu</span>
                 </div>
 
@@ -61,12 +64,13 @@
             </div>
         </section>
 
-        <!-- RIGHT: login form -->
         <section class="login-form-panel">
             <div class="login-form">
                 <% if (error) { %>
-                <div class="py-2" style="padding: 15px;border-left: 2px solid red;background-color: rgb(248, 229, 229);margin-bottom: 20px;">
-                    <%= error %>
+                <div class="alert alert-danger" role="alert">
+                    <% error.split(',').forEach(msg => { %>
+                    <div><%= msg %></div>
+                    <% }) %>
                 </div>
                 <% } %>
                 <h2 class="login-form__title">Sign Up</h2>
@@ -93,7 +97,6 @@
                         <div class=" password-input">
                             <input type="password" id="password" name="password" placeholder="Enter your password"
                                 autocomplete="new-password" required>
-                            <button type="button" id="togglePass" class="password-toggle" aria-label="Show password">👁</button>
                         </div>
                     </div>
 

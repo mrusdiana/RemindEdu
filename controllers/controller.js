@@ -1,8 +1,24 @@
-const { timeRemaining, checkUrgency, countUrgentTasks } = require('../helpers/helper');
-const { User, Task, Post, Profile } = require('../models/index')
-const transporter = require('../config/mailer');
+const { timeRemaining, checkUrgency } = require('../helpers/helper');
+const { User, Task, Post, Profile, Hastag } = require('../models/index')
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
+
+function validationMessages(error) {
+    return error.errors.map(e => e.message).join(',');
+}
+
+async function syncPostHashtags(post) {
+    const matches = (post.content || '').match(/#([\p{L}\p{N}_]+)/gu) || [];
+    const names = [...new Set(matches.map(tag => tag.slice(1).toLowerCase()))];
+
+    const tags = [];
+    for (const name of names) {
+        const [tag] = await Hastag.findOrCreate({ where: { name } });
+        tags.push(tag);
+    }
+
+    await post.setHastags(tags);
+}
 
 class Controller {
 
@@ -10,7 +26,8 @@ class Controller {
         try {
             res.render('homePage')
         } catch (error) {
-            res.send(error)
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -18,7 +35,8 @@ class Controller {
         try {
             res.render('register', { error: req.query.error || null });
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -28,17 +46,18 @@ class Controller {
             let user = await User.findByPk(req.session.userId)
             let taskCompleted = await Task.findAll({ where: { userId: req.session.userId, isCompleted: true } })
             let taskUnfinish = await Task.findAll({ where: { userId: req.session.userId, isCompleted: false } })
+            let nowDate = await Task.nowDate()
 
-            const today = new Date();   // ← ini WAJIB ada, cek lagi apa masih ada di file kamu
+            const today = new Date();   
 
             const calMonth = req.query.month !== undefined ? parseInt(req.query.month) : today.getMonth();
             const calYear = req.query.year !== undefined ? parseInt(req.query.year) : today.getFullYear();
 
 
-            res.render('dashboard', { tasks, role: 'student', user, taskCompleted, taskUnfinish, timeRemaining, checkUrgency, countUrgentTasks, calMonth, calYear });
+            res.render('dashboard', { tasks, role: 'student', user, taskCompleted, taskUnfinish, timeRemaining, checkUrgency, calMonth, calYear, nowDate });
         } catch (error) {
-            console.log(error);
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -50,7 +69,8 @@ class Controller {
             const completedTasks = await Task.count({ where: { isCompleted: true } });
             res.render('adminDashboard', { totalUsers, totalTasks, totalPosts, completedTasks });
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -59,7 +79,8 @@ class Controller {
             const users = await User.findAll({ order: [['id', 'ASC']] });
             res.render('manageUsers', { users, sessionUserId: req.session.userId });
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -72,15 +93,26 @@ class Controller {
                 return res.status(400).send('Role tidak valid.');
             }
 
-            // admin tidak boleh mengubah role akunnya sendiri agar tidak terkunci
             if (Number(id) === req.session.userId) {
                 return res.status(403).send('Tidak bisa mengubah role akun sendiri.');
+            }
+
+            const target = await User.findByPk(id);
+            if (!target) {
+                return res.status(404).send('User tidak ditemukan.');
+            }
+            if (target.role === 'admin' && role === 'student') {
+                const adminCount = await User.count({ where: { role: 'admin' } });
+                if (adminCount <= 1) {
+                    return res.status(400).send('Tidak bisa menurunkan admin terakhir.');
+                }
             }
 
             await User.update({ role }, { where: { id } });
             res.redirect('/admin/users');
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -88,15 +120,15 @@ class Controller {
         try {
             const { name, email, password } = req.body;
 
-            // role tidak boleh diambil dari input user — semua pendaftar adalah student
             await User.create({ name, email, password, role: 'student' });
 
             res.redirect('/login');
         } catch (error) {
             if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
-                return res.redirect(`/register?error=${encodeURIComponent(error.errors[0].message)}`);
+                return res.redirect(`/register?error=${encodeURIComponent(validationMessages(error))}`);
             }
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -106,30 +138,36 @@ class Controller {
 
             res.render('login', { error: req.query.error || null });
         } catch (error) {
-            res.send(error);
+            // console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
     static async postLogin(req, res) {
         try {
             const { email, password } = req.body;
+
+            if (!email || !password) {
+                return res.redirect('/login?error=Email dan password wajib diisi');
+            }
+
             const user = await User.findOne({ where: { email } });
 
             if (!user || !(await user.comparePassword(password))) {
-                return res.redirect('/login?error=Email atau password salah'); // Pakai return
+                return res.redirect('/login?error=Email atau password salah'); 
             }
 
             req.session.userId = user.id;
             req.session.role = user.role;
 
             if (user.role === 'admin') {
-                return res.redirect('/admin'); // Pakai return
+                return res.redirect('/admin'); 
             }
 
-            return res.redirect('/student'); // Pakai return
-        } catch (err) {
-            console.log(err);
-            res.send(err);
+            return res.redirect('/student');
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -139,7 +177,8 @@ class Controller {
                 res.redirect('/login');
             });
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -151,32 +190,45 @@ class Controller {
 
             const options = {
                 where: {},
-                include: {
-                    model: User
-                },
+                include: [
+                    { model: User },
+                    { model: Hastag, through: { attributes: [] } }
+                ],
                 order:
                     [['createdAt', 'DESC']]
             };
 
             if (search) {
-                options.where.content = {
-                    [Op.iLike]: `%${search}%`
+                const term = search.trim().replace(/^#/, '');
+
+                const matchedTags = await Hastag.findAll({
+                    where: { name: { [Op.iLike]: `%${term}%` } },
+                    include: { model: Post, attributes: ['id'], through: { attributes: [] } }
+                });
+                const tagPostIds = matchedTags.flatMap(tag => tag.Posts.map(p => p.id));
+
+                options.where = {
+                    [Op.or]: [
+                        { content: { [Op.iLike]: `%${search}%` } },
+                        { id: { [Op.in]: tagPostIds } }
+                    ]
                 };
             }
 
             let posts = await Post.findAll(options);
-
-            console.log(posts);
+            const user = await User.findByPk(req.session.userId);
 
             res.render('socialFeed', {
                 posts,
+                user,
+                search: search || '',
                 sessionUserId: req.session.userId,
                 isAdmin,
                 basePath: isAdmin ? '/admin' : '/student',
             });
         } catch (error) {
-            console.log(error);
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -187,31 +239,36 @@ class Controller {
 
             res.render('addTask', { id, error: req.query.error || null })
         } catch (error) {
-            res.send(error)
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
     static async postAddTask(req, res) {
         try {
 
-            let { title, courseName, deadline } = req.body
+            let { title, courseName, deadline, description } = req.body
             await Task.create({
                 title,
                 courseName,
-                deadline,
+                deadline: deadline || null,
+                description,
                 userId: req.session.userId
             })
 
             res.redirect('/student')
         } catch (error) {
-            res.send(error)
+            if (error.name === 'SequelizeValidationError') {
+                return res.redirect(`/student/tasks/${req.params.id}/add?error=${encodeURIComponent(validationMessages(error))}`);
+            }
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
     static async getEditTask(req, res) {
         try {
             const isAdmin = req.session.role === 'admin';
-            // admin boleh mengedit task siapa pun; student hanya miliknya sendiri
             const where = isAdmin
                 ? { id: req.params.id }
                 : { id: req.params.id, userId: req.session.userId };
@@ -222,10 +279,11 @@ class Controller {
                 return res.status(404).send('Task tidak ditemukan atau bukan milik Anda.')
             }
 
-            res.render('editTask', { task, basePath: isAdmin ? '/admin' : '/student' })
+            res.render('editTask', { task, basePath: isAdmin ? '/admin' : '/student', error: req.query.error || null })
 
         } catch (error) {
-            res.send(error)
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -236,36 +294,53 @@ class Controller {
                 ? { id: req.params.id }
                 : { id: req.params.id, userId: req.session.userId };
 
-            let { title, courseName, deadline } = req.body
+            let { title, courseName, deadline, description } = req.body
 
-            await Task.update({
+            const task = await Task.findOne({ where })
+            if (!task) {
+                return res.status(404).send('Task tidak ditemukan atau bukan milik Anda.')
+            }
+
+            await task.update({
                 title,
                 courseName,
-                deadline,
-            }, { where })
+                deadline: deadline || null,
+                description,
+            })
 
             res.redirect(isAdmin ? '/admin' : '/student')
 
         } catch (error) {
-            res.send(error)
+            if (error.name === 'SequelizeValidationError') {
+                const base = req.session.role === 'admin' ? '/admin' : '/student';
+                return res.redirect(`${base}/tasks/${req.params.id}/edit?error=${encodeURIComponent(validationMessages(error))}`);
+            }
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
     static async getAddFeed(req, res) {
         try {
-            res.render('addFeed');
+            res.render('addFeed', { error: req.query.error || null });
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
     static async postAddFeed(req, res) {
         try {
             const { content } = req.body;
-            await Post.create({ content, userId: req.session.userId });
+            const post = await Post.create({ content, userId: req.session.userId });
+            await syncPostHashtags(post);
             res.redirect('/student/feeds');
         } catch (error) {
-            res.send(error);
+            if (error.name === 'SequelizeValidationError') {
+                return res.redirect(`/student/feeds/add?error=${encodeURIComponent(validationMessages(error))}`);
+            }
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -273,13 +348,13 @@ class Controller {
         try {
             const isAdmin = req.session.role === 'admin';
             const { id } = req.params;
-            // admin boleh mengedit post siapa pun; student hanya miliknya sendiri
             const where = isAdmin ? { id } : { id, userId: req.session.userId };
             const post = await Post.findOne({ where });
             if (!post) return res.status(404).send('Post tidak ditemukan atau bukan milik Anda.');
-            res.render('editFeed', { post, basePath: isAdmin ? '/admin' : '/student' });
+            res.render('editFeed', { post, basePath: isAdmin ? '/admin' : '/student', error: req.query.error || null });
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -289,10 +364,18 @@ class Controller {
             const { id } = req.params;
             const where = isAdmin ? { id } : { id, userId: req.session.userId };
             const { content } = req.body;
-            await Post.update({ content }, { where });
+            const post = await Post.findOne({ where });
+            if (!post) return res.status(404).send('Post tidak ditemukan atau bukan milik Anda.');
+            await post.update({ content });
+            await syncPostHashtags(post);
             res.redirect(isAdmin ? '/admin/feeds' : '/student/feeds');
         } catch (error) {
-            res.send(error);
+            if (error.name === 'SequelizeValidationError') {
+                const base = req.session.role === 'admin' ? '/admin' : '/student';
+                return res.redirect(`${base}/feeds/${req.params.id}/edit?error=${encodeURIComponent(validationMessages(error))}`);
+            }
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -300,7 +383,6 @@ class Controller {
         try {
             const { id } = req.params;
 
-            // ambil task, pastikan milik user yang login
             const task = await Task.findOne({
                 where: { id, userId: req.session.userId }
             });
@@ -309,7 +391,6 @@ class Controller {
                 return res.status(404).send('Task tidak ditemukan atau bukan milik Anda.');
             }
 
-            // toggle isCompleted
             await Task.update(
                 { isCompleted: !task.isCompleted },
                 { where: { id, userId: req.session.userId } }
@@ -317,7 +398,8 @@ class Controller {
 
             res.redirect('/student');
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -329,7 +411,8 @@ class Controller {
             await Post.destroy({ where });
             res.redirect(isAdmin ? '/admin/feeds' : '/student/feeds');
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -342,7 +425,8 @@ class Controller {
 
             res.redirect(isAdmin ? '/admin' : '/student')
         } catch (error) {
-            res.send(error)
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 
@@ -353,7 +437,8 @@ class Controller {
             });
             res.render('profile', { user });
         } catch (error) {
-            res.send(error);
+            console.error(error);
+            res.status(500).send('Internal Server Error');
         }
     }
 }

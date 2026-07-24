@@ -48,6 +48,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         notNull: {
           msg: "Email is Required!"
+        },
+        isEmail: {
+          msg: "Email format is invalid!"
         }
       }
     },
@@ -60,6 +63,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         notNull: {
           msg: "Password is Required!"
+        },
+        len: {
+          args: [6, 72],
+          msg: "Password must be 6-72 characters!"
         }
       }
     },
@@ -84,9 +91,11 @@ module.exports = (sequelize, DataTypes) => {
     return await bcrypt.compare(candidatePassword, this.password);
   };
 
-  User.beforeCreate(async (user) => {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
+  User.beforeSave(async (user) => {
+    if (user.changed('password')) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, salt);
+    }
   });
 
   return User;
