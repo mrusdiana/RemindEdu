@@ -8,10 +8,12 @@ const {google} = require('googleapis')
 const { User } = require('../models/index')
 
 const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOLE_CLIENT_ID,
-    process.env.GOOLE_CLIENT_SECRET,
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
     'http://localhost:3000/login/google/callback'
 )
+
+console.log('CEK CLIENT ID:', process.env.GOOGLE_CLIENT_ID);
 
 const scopes = [
     "https://www.googleapis.com/auth/userinfo.email",
@@ -24,56 +26,60 @@ const authorizationUrl = oauth2Client.generateAuthUrl({
     include_granted_scopes: true,
 })
 
-// ===== PUBLIK — belum perlu login =====
 router.get('/', Controller.homePage);
 router.get('/login', Controller.login);
+router.post('/login', Controller.postLogin);
 router.get('/login/google', (req, res) => {
     res.redirect(authorizationUrl)
 });
 router.get('/login/google/callback', async (req, res) => {
-    const {code} = req.query
-
-    const {tokens} = await oauth2Client.getToken(code as string);
-
-    oauth2Client.setCredentials(tokens);
-
-    const oauth2 = google.oauth2({
-        auth: oauth2Client,
-        version: 'v2'
-    })
-
-    const {data} = await oauth2.userinfo.get()
-
-    if(!data || !data.name){
-        return res.json({
-            data:data,
-        })
-    }
-
-    let user = await User.findUnique({
-        where: {
-            email: data.email
+    try {
+        const { code } = req.query;
+        if (!code) {
+            return res.redirect('/login?error=Google login gagal');
         }
-    })
 
-    if(!user) {
-        user = await User.create({
-            data: {
-                name: data.name,
+        const { tokens } = await oauth2Client.getToken(code);
+        oauth2Client.setCredentials(tokens);
+
+        const oauth2 = google.oauth2({
+            auth: oauth2Client,
+            version: 'v2'
+        });
+
+        const { data } = await oauth2.userinfo.get();
+
+        if (!data || !data.email) {
+            return res.redirect('/login?error=Tidak bisa membaca akun Google');
+        }
+
+        let user = await User.findOne({ where: { email: data.email } });
+
+        if (!user) {
+            const crypto = require('crypto');
+            user = await User.create({
+                name: data.name || data.email,
                 email: data.email,
-                address:"-"
-            }
-        })
-    } 
+                password: crypto.randomBytes(24).toString('hex'),
+                role: 'student'
+            });
+        }
+
+        req.session.userId = user.id;
+        req.session.role = user.role;
+
+        return res.redirect(user.role === 'admin' ? '/admin' : '/student');
+    } catch (error) {
+        console.error(error);
+        return res.redirect('/login?error=Google login gagal');
+    }
 });
 router.get('/register', Controller.getRegister);
 router.post('/register', Controller.postRegister);
 
-// // ===== WAJIB LOGIN dari sini ke bawah =====
 router.use(isLoggedIn);
 router.get('/logout', Controller.logout);
 
-// // ===== CABANG BERDASARKAN ROLE =====
 router.use('/student', isStudent, studentRouter);
 router.use('/admin', isAdmin, adminRouter);
 

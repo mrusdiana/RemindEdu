@@ -1,7 +1,6 @@
 const Controller = require('../controllers/controller');
 const router = require('express').Router();
 
-// dashboard: cuma nampilin task MILIK SENDIRI
 router.get('/', Controller.studentDashboard);
 router.get('/tasks/:id/add', Controller.getAddTask);
 router.post('/tasks/:id/add', Controller.postAddTask);

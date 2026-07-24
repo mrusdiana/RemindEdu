@@ -21,7 +21,6 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav class="navbar navbar-expand bg-white border-bottom px-3 px-md-4 py-2">
     <div class="container-fluid p-0">
       <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="/">
@@ -36,11 +35,17 @@
     </div>
   </nav>
 
-  <!-- Content -->
   <main class="container py-5" style="max-width: 560px;">
     <h4 class="fw-bold mb-4">Edit Post</h4>
 
     <div class="form-card">
+      <% if (error) { %>
+      <div class="alert alert-danger py-2 small" role="alert">
+        <% error.split(',').forEach(msg => { %>
+        <div><%= msg %></div>
+        <% }) %>
+      </div>
+      <% } %>
       <form method="POST" action="<%= basePath %>/feeds/<%= post.id %>/edit">
         <div class="mb-4">
           <label for="content" class="form-label">Konten Post</label>
@@ -51,6 +56,7 @@
             rows="5"
             required
           ><%= post.content %></textarea>
+          <small class="text-muted">Tips: tambahkan #hashtag (mis. #kuliah #ngoding) — otomatis jadi tag yang bisa dicari.</small>
         </div>
         <div class="d-flex gap-2">
           <button type="submit" class="btn-submit">

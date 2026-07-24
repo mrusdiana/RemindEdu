@@ -10,57 +10,43 @@
   <link rel="stylesheet" href="/styles/dashboard.css">
   <style>
     body { font-family: 'Inter', sans-serif; background: #F5F7FA; }
-
-    /* Navbar */
     .brand-icon { background: #2F5EFF; color: #fff; border-radius: 10px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; }
     .brand-text  { font-weight: 800; font-size: 1.1rem; color: #111827; }
     .text-primary-brand { color: #3B82F6; }
-
     .nav-pill-group { background: #F3F4F6; border-radius: 999px; padding: 4px; display: flex; gap: 2px; }
     .nav-pill-item { display: flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; font-size: .875rem; font-weight: 500; color: #4B5563; text-decoration: none; transition: background .15s; }
     .nav-pill-item:hover { background: #E5E7EB; color: #111827; }
     .nav-pill-item.active { background: #fff; color: #2563EB; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-
     .notif-btn { position: relative; background: none; border: none; color: #6B7280; font-size: 1.15rem; width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; transition: background .15s; }
     .notif-btn:hover { background: #F3F4F6; color: #111827; }
     .notif-badge { position: absolute; top: 2px; right: 2px; background: #F59E0B; color: #fff; font-size: .62rem; font-weight: 700; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-
     .avatar-circle { width: 36px; height: 36px; border-radius: 50%; background: #2563EB; color: #fff; font-size: .8rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
-
-    /* Header */
     .feed-title { font-size: 1.6rem; font-weight: 800; color: #111827; }
     .feed-subtitle { color: #9CA3AF; font-size: .9rem; }
-
     .btn-add-post { background: #2563EB; color: #fff; border: none; border-radius: 10px; padding: 10px 20px; font-size: .875rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background .15s; }
     .btn-add-post:hover { background: #1D4ED8; color: #fff; }
-
-    /* Post card */
     .post-card { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.06); padding: 1.5rem 1.75rem; border: 1px solid #F1F3F6; }
-
     .avatar-sm { width: 44px; height: 44px; border-radius: 50%; font-size: .85rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    /* warna avatar bervariasi berdasarkan huruf pertama nama */
     .avatar-sm.c0 { background: #DBEAFE; color: #2563EB; }
     .avatar-sm.c1 { background: #D1FAE5; color: #059669; }
     .avatar-sm.c2 { background: #FDE68A; color: #B45309; }
     .avatar-sm.c3 { background: #FBCFE8; color: #BE185D; }
     .avatar-sm.c4 { background: #E0E7FF; color: #4338CA; }
-
     .post-author { font-weight: 700; font-size: .95rem; color: #111827; }
     .post-meta { font-size: .8rem; color: #9CA3AF; }
-
     .post-content { font-size: .95rem; color: #111827; line-height: 1.6; margin-top: .35rem; }
-
     .icon-action { background: #F3F4F6; border: none; border-radius: 8px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; color: #6B7280; font-size: .9rem; text-decoration: none; transition: background .15s; }
     .icon-action:hover { background: #EEF1F6; color: #111827; }
     .icon-action--danger:hover { background: #FEE2E2; color: #DC2626; }
-
     .bookmark-btn { background: none; border: none; color: #D1D5DB; font-size: 1.1rem; padding: 0; }
     .bookmark-btn:hover { color: #9CA3AF; }
+    .post-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: .6rem; }
+    .tag-chip { background: #EFF6FF; color: #2563EB; border-radius: 999px; padding: 3px 12px; font-size: .78rem; font-weight: 600; text-decoration: none; transition: background .15s; }
+    .tag-chip:hover { background: #DBEAFE; color: #1D4ED8; }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
   <nav class="navbar navbar-expand bg-white border-bottom px-3 px-md-4 py-2 fixed-top">
     <div class="container-fluid p-0">
       <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="/">
@@ -69,15 +55,17 @@
       </a>
 
       <div class="nav-pill-group d-none d-md-flex mx-auto">
-        <a href="/student" class="nav-pill-item">
+        <a href="/<%= user.role === "admin" ? "admin" : "student" %>" class="nav-pill-item">
           <i class="bi bi-bar-chart"></i> Dashboard
         </a>
         <a href="/student/feeds" class="nav-pill-item active">
           <i class="bi bi-layers"></i> Social Feed
         </a>
-        <a href="/student/profile" class="nav-pill-item">
-          <i class="bi bi-journal-bookmark"></i> Profile
-        </a>
+        <% if (user.role === "student") { %>
+          <a href="/student/profile" class="nav-pill-item">
+            <i class="bi bi-journal-bookmark"></i> Profile
+          </a>
+        <% } %>
       </div>
 
       <div class="d-flex align-items-center gap-3 ms-auto ms-md-0">
@@ -85,13 +73,14 @@
           <i class="bi bi-bell"></i>
           <span class="notif-badge">3</span>
         </button>
-        <a href="/student/profile" class="avatar-circle"><%= posts[0].User.name.slice(0,2).toUpperCase()%></a>
+        <a href="/logout" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
       </div>
 
     </div>
   </nav>
 
-  <!-- Content -->
   <main class="container py-5 mt-5" style="max-width: 680px;">
     <div class="d-flex align-items-center justify-content-between mb-4">
       <div>
@@ -105,7 +94,7 @@
       <% } %>
     </div>
 
-    <form action="/student/feeds" method="GET" class="mb-4">
+    <form action="<%= basePath %>/feeds" method="GET" class="mb-4">
   <div class="input-group shadow-sm">
     <span class="input-group-text bg-white border-end-0 text-muted">
       <i class="bi bi-search"></i>
@@ -114,8 +103,8 @@
       type="text" 
       name="search" 
       class="form-control border-start-0 py-2" 
-      placeholder="Cari postingan atau tips belajar..." 
-      
+      placeholder="Cari postingan atau #hashtag..." 
+      value="<%= search %>"
     >
     <button class="btn btn-primary" type="submit">Cari</button>
 
@@ -125,7 +114,11 @@
     <% if (posts.length === 0) { %>
     <div class="post-card text-center py-5 text-muted">
       <i class="bi bi-chat-square-text fs-2 d-block mb-2"></i>
+      <% if (search) { %>
+      Tidak ada post yang cocok dengan "<%= search %>".
+      <% } else { %>
       Belum ada post. Jadilah yang pertama!
+      <% } %>
     </div>
     <% } %>
 
@@ -153,6 +146,13 @@
             </div>
           </div>
           <p class="post-content mb-0"><%= post.content %></p>
+          <% if (post.Hastags && post.Hastags.length) { %>
+          <div class="post-tags">
+            <% post.Hastags.forEach(tag => { %>
+            <a href="<%= basePath %>/feeds?search=<%= encodeURIComponent('#' + tag.name) %>" class="tag-chip">#<%= tag.name %></a>
+            <% }) %>
+          </div>
+          <% } %>
         </div>
       </div>
     </div>

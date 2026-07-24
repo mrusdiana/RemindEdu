@@ -1,7 +1,6 @@
 const Controller = require('../controllers/controller');
 const router = require('express').Router();
 
-// dashboard admin: nampilin task SEMUA USER
 router.get('/', Controller.adminDashboard);
 router.get('/tasks/:id/edit', Controller.getEditTask);
 router.post('/tasks/:id/edit', Controller.postEditTask);
@@ -12,7 +11,7 @@ router.get('/feeds/:id/edit', Controller.getEditFeed);
 router.post('/feeds/:id/edit', Controller.postEditFeed);
 router.post('/feeds/:id/delete', Controller.deleteFeed);
 
-router.get('/users', Controller.manageUsers); // fitur khusus admin: kelola akun
+router.get('/users', Controller.manageUsers); 
 router.post('/users/:id/role', Controller.updateUserRole);
 
 module.exports = router;
