@@ -1,0 +1,24 @@
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    /* Ganti URL di bawah dengan path gambar Anda */
+    background-image: url('../assets/backgroundAdd.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Membuat lapisan blur di atas background */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: blur(8px); /* Atur tingkat keburaman di sini */
+    transform: scale(1.1); /* Zoom sedikit untuk mencegah pinggiran putih akibat blur */
+    z-index: -1;
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — RemindEdu</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/dashboard.css">
+</head>
+<body>
+
+  <nav class="navbar navbar-expand bg-white border-bottom px-3 px-md-4 py-2 fixed-top">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand d-flex align-items-center gap-2 m-0" href="/">
+        <span class="brand-icon"><i class="bi bi-mortarboard-fill"></i></span>
+        <span class="brand-text">Remind<span class="text-primary-brand">Edu</span></span>
+      </a>
+
+      <div class="nav-pill-group d-none d-md-flex mx-auto">
+        <a href="/student" class="nav-pill-item active">
+          <i class="bi bi-bar-chart"></i> Dashboard
+        </a>
+        <a href="/student/feeds" class="nav-pill-item">
+          <i class="bi bi-layers"></i> Social Feed
+        </a>
+        <a href="/student/profile" class="nav-pill-item">
+          <i class="bi bi-journal-bookmark"></i> Profile
+        </a>
+      </div>
+
+      <div class="d-flex align-items-center gap-3 ms-auto ms-md-0">
+        <button class="notif-btn" type="button" aria-label="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="notif-badge"><%= taskUnfinish.length %></span>
+        </button>
+        <span class="avatar-circle"><%= user.name.slice(0,2).toUpperCase() %></span>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Page content -->
+  <main class="container dashboard-container py-4 py-md-5 mt-5">
+
+    <!-- Greeting -->
+    <div class="mb-4">
+      <h2 class="fw-bold mb-1">Good afternoon,  <%= user.name %> !</h2>
+      <p class="text-muted mb-0"><%= new Date().toLocaleDateString('id-ID') %> &middot; <%= taskUnfinish.length %> pending tasks</p>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-md-4">
+        <div class="stat-card stat-card--blue d-flex align-items-center gap-3">
+          <div class="stat-icon"><i class="bi bi-clock-fill"></i></div>
+          <div>
+            <div class="stat-number"><%= taskUnfinish ? taskUnfinish.length : 0 %></div>
+            <div class="stat-caption">Pending Tasks</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="stat-card stat-card--green d-flex align-items-center gap-3">
+          <div class="stat-icon"><i class="bi bi-check-circle-fill"></i></div>
+          <div>
+            <div class="stat-number"><%= taskCompleted ? taskCompleted.length : 0 %></div>
+            <div class="stat-caption">Completed</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="stat-card stat-card--yellow d-flex align-items-center gap-3">
+          <div class="stat-icon"><i class="bi bi-bell-fill"></i></div>
+          <div>
+            <% 
+            let totalUrgent = 0;
+            // let urgencys = ''
+            for (const element of taskUnfinish) {
+              let days = timeRemaining(element.deadline);
+              let urgency = checkUrgency(days);
+              // urgencys = urgency
+              if (urgency === "Urgent") {
+                totalUrgent++;
+              }
+            }
+            %>
+            <div class="stat-number"><%= totalUrgent %></div>
+            <div class="stat-caption">Urgent Deadlines</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      
+
+      <!-- LEFT COLUMN: calendar + nearest deadlines -->
+      <div class="col-12 col-lg-5">
+
+        <div class="card panel-card border-0 shadow-sm mb-4">
+        <div class="card-body p-3 p-md-4">
+      
+          <%
+            const today = new Date();
+            const monthNames = ["January","February","March","April","May","June","July",
+                                "August","September","October","November","December"];
+      
+            // calMonth & calYear SEKARANG DATANG DARI CONTROLLER, bukan dihitung di sini lagi
+      
+            const firstDayOfWeek = new Date(calYear, calMonth, 1).getDay();
+            const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      
+            const deadlineDays = new Set();
+            taskUnfinish.forEach(t => {
+              if (t.deadline) {
+                const d = new Date(t.deadline);
+                if (d.getFullYear() === calYear && d.getMonth() === calMonth) {
+                  deadlineDays.add(d.getDate());
+                }
+              }
+            });
+      
+            const totalCells = firstDayOfWeek + daysInMonth;
+            const totalWeeks = Math.ceil(totalCells / 7);
+            const calendarGrid = [];
+            let dayCounter = 1;
+            for (let w = 0; w < totalWeeks; w++) {
+              const week = [];
+              for (let d = 0; d < 7; d++) {
+                const cellIndex = w * 7 + d;
+                if (cellIndex < firstDayOfWeek || dayCounter > daysInMonth) {
+                  week.push(null);
+                } else {
+                  week.push(dayCounter);
+                  dayCounter++;
+                }
+              }
+              calendarGrid.push(week);
+            }
+      
+            // === hitung bulan sebelum & sesudah, buat href tombol ===
+            let prevMonth = calMonth - 1, prevYear = calYear;
+            if (prevMonth < 0) { prevMonth = 11; prevYear -= 1; }
+      
+            let nextMonth = calMonth + 1, nextYear = calYear;
+            if (nextMonth > 11) { nextMonth = 0; nextYear += 1; }
+          %>
+      
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <h6 class="fw-bold mb-0"><%= monthNames[calMonth] %> <%= calYear %></h6>
+            <div class="d-flex gap-1">
+              <a class="cal-nav-btn" href="?month=<%= prevMonth %>&year=<%= prevYear %>" aria-label="Previous month">
+                <i class="bi bi-chevron-left"></i>
+              </a>
+              <a class="cal-nav-btn" href="?month=<%= nextMonth %>&year=<%= nextYear %>" aria-label="Next month">
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+      
+          <table class="calendar-table w-100">
+            <thead>
+              <tr><th>Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th></tr>
+            </thead>
+            <tbody>
+              <% calendarGrid.forEach(week => { %>
+              <tr>
+                <% week.forEach(day => { %>
+                  <% if (day === null) { %>
+                    <td></td>
+                  <% } else {
+                       let cls = '';
+                       // "hari ini" cuma nyala kalau bulan yg lagi dilihat = bulan asli sekarang
+                       if (calMonth === today.getMonth() && calYear === today.getFullYear() && day === today.getDate()) {
+                         cls += ' day-today';
+                       }
+                       if (deadlineDays.has(day)) cls += ' day-deadline';
+                  %>
+                    <td class="<%= cls.trim() %>"><%= day %></td>
+                  <% } %>
+                <% }) %>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+        </div>
+
+        <div class="card panel-card border-0 shadow-sm">
+          <div class="card-body p-3 p-md-4">
+            <h6 class="fw-bold mb-3"><i class="bi bi-bell text-warning me-1"></i> Nearest Deadlines</h6>
+
+            <% taskUnfinish.forEach(element => { %>
+             
+            
+            <div class="deadline-row d-flex align-items-start gap-2">
+              <span class="deadline-dot deadline-dot--blue"></span>
+              <div>
+                <div class="deadline-title"><%= element.title %></div>
+                <div class="deadline-sub"><span class="tag-inline tag-inline--blue"><%= element.courseName %></span> <%= element.formatDeadLine(element.deadline) %>, (<%= timeRemaining(element.deadline) %> days left)</div>
+              </div>
+            </div>
+
+            <% }) %>
+
+          
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: task list -->
+      <div class="col-12 col-lg-7">
+        <div class="card panel-card border-0 shadow-sm">
+          <div class="card-body p-3 p-md-4">
+
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <h6 class="fw-bold mb-0">My Tasks</h6>
+              <a href="/student/tasks/<%= user.id %>/add" class="btn btn-add-task">
+                <i class="bi bi-plus-lg"></i> Add Task
+              </a>
+            </div>
+            <p class="text-muted small mb-3"><%= taskUnfinish.length %> remaining, <%= taskCompleted.length %> done</p>
+
+            <% taskUnfinish.forEach(element => { %>
+            <div class="task-row d-flex align-items-center gap-3">
+              <form method="POST" action="/student/tasks/<%= element.id %>" class="d-inline-flex m-0">
+               <button type="submit" class="task-check" aria-label="Mark task complete" title="Mark as complete"></button>
+              </form>
+              <div class="flex-grow-1">
+                <div class="task-title"><%= element.title %></div>
+                <div class="task-meta">
+                  <span class="tag-inline tag-inline--blue"><%= element.courseName %></span>
+                  <span class="task-due"><i class="bi bi-clock"></i> <%= element.formatDeadLine(element.deadline) %></span>
+                  <span class="tag-urgent"><%= checkUrgency(timeRemaining(element.deadline)) %></span>
+                </div>
+              </div>
+              <div class="task-actions">
+                <a href="/student/tasks/<%= element.id %>/edit" class="icon-action" aria-label="Edit task" title="Edit"><i class="bi bi-pencil"></i></a>
+                <a href="/student/tasks/<%= element.id %>/delete" class="icon-action icon-action--danger" aria-label="Delete task" title="Delete"><i class="bi bi-trash"></i></a>
+              </div>
+            </div>
+            <% }) %>
+
+            <% taskCompleted.forEach(element => { %>
+  <div class="task-row d-flex align-items-center gap-3 px-4 py-3 mb-3 rounded-4 border-0" style="background-color: #f2fbf7; border-left: 4px solid #2ecc71 !important;">
+    <div class="task-check rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 26px; height: 26px; min-width: 26px; background-color: #2ecc71;">
+      <i class="bi bi-check fs-6 fw-bold"></i>
+    </div>
+    <div class="flex-grow-1">
+      <div class="task-title text-decoration-line-through fw-semibold" style="color: #8c9ba5;"><%= element.title %></div>
+      <div class="task-meta d-flex align-items-center gap-2 mt-1">
+        <span class="tag-inline px-2.5 py-0.5 rounded-pill fw-semibold" style="font-size: 0.75rem; background-color: #e6edff; color: #4a72ff;"><%= element.courseName %></span>
+        <span class="task-due small" style="color: #94a3b8;"><i class="bi bi-check2-square"></i>Completed <%= element.dueDate %></span>
+      </div>
+    </div>
+  </div>
+<% }) %>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
+

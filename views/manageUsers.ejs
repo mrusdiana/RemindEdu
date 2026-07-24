@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Users — RemindEdu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #F5F7FA; }
+    .navbar-brand span { font-weight: 800; }
+    .panel-card { border-radius: 14px; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+    .badge-admin   { background: #FEE2E2; color: #B91C1C; font-weight: 600; border-radius: 6px; padding: 3px 10px; font-size: .75rem; }
+    .badge-student { background: #DBEAFE; color: #1D4ED8; font-weight: 600; border-radius: 6px; padding: 3px 10px; font-size: .75rem; }
+    .table th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: #6B7280; font-weight: 600; }
+    .avatar-sm { width: 32px; height: 32px; border-radius: 50%; background: #EEF4FF; color: #3B82F6; font-size: .75rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand bg-white border-bottom px-4 py-2 shadow-sm">
+    <a class="navbar-brand fw-bold" href="/admin">
+      <i class="bi bi-mortarboard-fill text-primary me-1"></i>
+      Remind<span class="text-primary">Edu</span>
+      <span class="badge bg-danger ms-2 fs-6">Admin</span>
+    </a>
+    <div class="ms-auto d-flex gap-3">
+      <a href="/admin" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-bar-chart"></i> Dashboard
+      </a>
+      <a href="/logout" class="btn btn-sm btn-outline-secondary">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main class="container py-5">
+    <div class="mb-4 d-flex align-items-center justify-content-between">
+      <div>
+        <h4 class="fw-bold mb-1">Manage Users</h4>
+        <p class="text-muted mb-0">Daftar semua pengguna yang terdaftar di platform.</p>
+      </div>
+      <span class="badge bg-primary rounded-pill fs-6"><%= users.length %> users</span>
+    </div>
+
+    <div class="panel-card p-0 overflow-hidden">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th class="ps-4">#</th>
+            <th>User</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Bergabung</th>
+            <th>Ubah Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((user, index) => { %>
+          <tr>
+            <td class="ps-4 text-muted small"><%= index + 1 %></td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <span class="avatar-sm">
+                  <%= user.name ? user.name.slice(0,2).toUpperCase() : '??' %>
+                </span>
+                <span class="fw-semibold"><%= user.name %></span>
+              </div>
+            </td>
+            <td class="text-muted"><%= user.email %></td>
+            <td>
+              <% if (user.role === 'admin') { %>
+                <span class="badge-admin"><i class="bi bi-shield-fill me-1"></i>Admin</span>
+              <% } else { %>
+                <span class="badge-student"><i class="bi bi-mortarboard me-1"></i>Student</span>
+              <% } %>
+            </td>
+            <td class="text-muted small">
+              <%= user.createdAt ? new Date(user.createdAt).toLocaleDateString('id-ID') : '-' %>
+            </td>
+            <td>
+              <% if (user.id === sessionUserId) { %>
+                <span class="text-muted small fst-italic">Akun Anda</span>
+              <% } else { %>
+                <form method="POST" action="/admin/users/<%= user.id %>/role" class="d-flex align-items-center gap-2 m-0">
+                  <select name="role" class="form-select form-select-sm w-auto">
+                    <option value="student" <%= user.role === 'student' ? 'selected' : '' %>>Student</option>
+                    <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>Admin</option>
+                  </select>
+                  <button type="submit" class="btn btn-sm btn-outline-primary">Simpan</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+
+          <% if (users.length === 0) { %>
+          <tr>
+            <td colspan="6" class="text-center text-muted py-5">
+              <i class="bi bi-people fs-3 d-block mb-2"></i>
+              Belum ada user terdaftar.
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+[
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Mengerjakan Tugas Algoritma",
+      "description": "Menyelesaikan soal latihan struktur data bab 3",
+      "courseName": "Struktur Data",
+      "isCompleted": false,
+      "deadline": "2026-07-28"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "title": "Laporan Praktikum Basis Data",
+      "description": "Membuat laporan praktikum normalisasi database",
+      "courseName": "Basis Data",
+      "isCompleted": true,
+      "deadline": "2026-07-10"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "title": "Revisi Proposal Skripsi",
+      "description": "Memperbaiki bab 2 sesuai catatan dosen pembimbing",
+      "courseName": "Skripsi",
+      "isCompleted": false,
+      "deadline": "2026-08-01"
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "title": "Presentasi UI/UX Case Study",
+      "description": "Menyiapkan slide untuk presentasi kelas desain",
+      "courseName": "Desain Antarmuka",
+      "isCompleted": false,
+      "deadline": "2026-07-30"
+    },
+    {
+      "id": 5,
+      "userId": 4,
+      "title": "Kuis Jaringan Komputer",
+      "description": "Belajar materi subnetting untuk kuis minggu depan",
+      "courseName": "Jaringan Komputer",
+      "isCompleted": false,
+      "deadline": "2026-07-27"
+    },
+    {
+      "id": 6,
+      "userId": 5,
+      "title": "Edit Video Tugas Broadcasting",
+      "description": "Mengedit video tugas mata kuliah produksi media",
+      "courseName": "Produksi Media",
+      "isCompleted": true,
+      "deadline": "2026-07-12"
+    },
+    {
+      "id": 7,
+      "userId": 6,
+      "title": "Rangkuman Materi Kecerdasan Buatan",
+      "description": "Merangkum bab machine learning untuk persiapan UTS",
+      "courseName": "Kecerdasan Buatan",
+      "isCompleted": false,
+      "deadline": "2026-08-03"
+    },
+    {
+      "id": 8,
+      "userId": 8,
+      "title": "Latihan Soal Kalkulus",
+      "description": "Mengerjakan latihan soal integral lipat",
+      "courseName": "Kalkulus Lanjut",
+      "isCompleted": false,
+      "deadline": "2026-07-29"
+    }
+  ]

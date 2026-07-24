@@ -1,0 +1,74 @@
+[
+    {
+      "id": 1,
+      "name": "Ayu Lestari",
+      "email": "ayu.lestari@gmail.com",
+      "password": "123",
+      "role": "admin",
+      "createdAt": "2026-01-05T08:00:00.000Z",
+      "updatedAt": "2026-01-05T08:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Budi Santoso",
+      "email": "budi.santoso@gmail.com",
+      "password": "123",
+      "role": "student",
+      "createdAt": "2026-01-06T09:15:00.000Z",
+      "updatedAt": "2026-01-06T09:15:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Citra Dewi",
+      "email": "citra.dewi@gmail.com",
+      "password": "123",
+      "role": "student",
+      "createdAt": "2026-01-08T10:20:00.000Z",
+      "updatedAt": "2026-01-08T10:20:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Dimas Prakoso",
+      "email": "dimas.prakoso@gmail.com",
+      "password": "123",
+      "role": "admin",
+      "createdAt": "2026-01-10T07:45:00.000Z",
+      "updatedAt": "2026-01-10T07:45:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Eka Putri",
+      "email": "eka.putri@gmail.com",
+      "password": "123",
+      "role": "student",
+      "createdAt": "2026-01-12T11:30:00.000Z",
+      "updatedAt": "2026-01-12T11:30:00.000Z"
+    },
+    {
+      "id": 6,
+      "name": "Fajar Nugroho",
+      "email": "fajar.nugroho@gmail.com",
+      "password": "123",
+      "role": "student",
+      "createdAt": "2026-01-14T13:00:00.000Z",
+      "updatedAt": "2026-01-14T13:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "name": "Gita Ananda",
+      "email": "gita.ananda@gmail.com",
+      "password": "123",
+      "role": "student",
+      "createdAt": "2026-01-16T08:50:00.000Z",
+      "updatedAt": "2026-01-16T08:50:00.000Z"
+    },
+    {
+      "id": 8,
+      "name": "Hendra Wijaya",
+      "email": "hendra.wijaya@gmail.com",
+      "password": "123",
+      "role": "admin",
+      "createdAt": "2026-01-18T14:40:00.000Z",
+      "updatedAt": "2026-01-18T14:40:00.000Z"
+    }
+  ]

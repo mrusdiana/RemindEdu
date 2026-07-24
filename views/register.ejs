@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up — RemindEdu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/login.css">
+</head>
+
+<body>
+
+    <div class="login-page">
+
+        <!-- LEFT: hero / marketing panel -->
+        <section class="login-hero">
+            <div class="login-hero__decor login-hero__decor--one"></div>
+            <div class="login-hero__decor login-hero__decor--two"></div>
+
+            <div class="login-hero__content">
+                <div class="brand">
+                    <span class="brand__mark"></span>
+                    <span class="brand__name">RemindEdu</span>
+                </div>
+
+                <div class="hero" style="margin-bottom: 20px;">
+                    <h1 class="login-hero__title">Your academic</h1>
+                    <h1 class="login-hero__title">life, organised.</h1>
+                    <p class="login-hero__subtitle">
+                        Deadlines, tasks, and study connections
+                    </p>
+                    <p class="login-hero__subtitle">
+                        all in one clean dashboard built for
+                    </p>
+                    <p class="login-hero__subtitle">
+                        for university students.
+                    </p>
+                </div>
+
+                <ul class="login-hero__features">
+                    <li><span class="check">✓</span> Interactive deadline calendar</li>
+                    <li><span class="check">✓</span> Course-tagged task lists</li>
+                    <li><span class="check">✓</span> Student social feed with hashtags</li>
+                    <li><span class="check">✓</span> Study group discovery</li>
+                </ul>
+
+                <div class="testimonial">
+                    <div class="testimonial__stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <p class="testimonial__quote">RemindEdu is the only app that actually keeps up with my semester
+                        schedule.</p>
+                    <div class="testimonial__author">
+                        <span class="testimonial__avatar">TC</span>
+                        <div>
+                            <div class="testimonial__name">Tanya C.</div>
+                            <div class="testimonial__role">Medicine, Year 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT: login form -->
+        <section class="login-form-panel">
+            <div class="login-form">
+                <% if (error) { %>
+                <div class="py-2" style="padding: 15px;border-left: 2px solid red;background-color: rgb(248, 229, 229);margin-bottom: 20px;">
+                    <%= error %>
+                </div>
+                <% } %>
+                <h2 class="login-form__title">Sign Up</h2>
+                <p class="login-form__subtitle">Create your account to access your dashboard, tasks, and feed.</p>
+
+                <form action="/register" method="post" novalidate>
+                    <div class="field">
+                        <label for="username">Name</label>
+                        <input type="text" class="form-control" id="username" name="name" placeholder="Your name"
+                            autocomplete="username" required
+                            style="padding: 10px; width: 100%;border-radius: 8px;border: 1px solid gainsboro;">
+                    </div>
+
+                    <div class="field">
+                        <label for="email">University Email</label>
+                        <input type="email" id="email" name="email" placeholder="you@university.edu"
+                            autocomplete="username" required>
+                    </div>
+
+                    <div class="field">
+                        <div class="field__label-row">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class=" password-input">
+                            <input type="password" id="password" name="password" placeholder="Enter your password"
+                                autocomplete="new-password" required>
+                            <button type="button" id="togglePass" class="password-toggle" aria-label="Show password">👁</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Sign up <span class="arrow">→</span></button>
+
+                    <p class="signup-line">Already have an account? <a href="/login"
+                            class="link-inline link-inline--bold">Log in</a></p>
+
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('togglePass');
+        const passInput = document.getElementById('password');
+        toggleBtn.addEventListener('click', () => {
+            const isPassword = passInput.type === 'password';
+            passInput.type = isPassword ? 'text' : 'password';
+            toggleBtn.textContent = isPassword ? '🙈' : '👁';
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
